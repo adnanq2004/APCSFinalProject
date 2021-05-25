@@ -2,6 +2,9 @@
 [Prototype]
 https://docs.google.com/document/d/1k_w6A_P8MXqn3acamZcGMdxRVrvWz1QNINchRI9JinE/edit?usp=sharing
 
+[Development Logs]
+https://docs.google.com/document/d/1u7LG0NSRZdFLRX3A57-8_8ER3wPDDsv8Ua7UzwOUafQ/edit?usp=sharing
+
 [Group Name]
 Two For One Pac-kage
 
