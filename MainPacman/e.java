@@ -31,7 +31,7 @@ public class e{
   }
 
   private static void level1() {
-      char[][] level = generatemap("level1.txt");
+      char[][] level = generatemap("./level1.txt");
       for (char[] a: level) {
         for (char b: a) {
           System.out.print(b);
