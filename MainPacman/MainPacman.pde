@@ -6,6 +6,7 @@ PFont f;
 double currentlevel;
 char[][] levelmap;
 int timenow;
+int collected;
 
 void setup() {
   size(1000,930);
@@ -57,9 +58,15 @@ void draw() {
   if (currentlevel == 1) {
     levelmap = generatemap("./level1.txt");
     currentlevel = 1.1;
+    collected = 0;
   }
   if (currentlevel == 1.1) {
-    level(levelmap);
+    if (collected == 251) {
+      currentlevel = 2;
+    }
+    else {
+      level(levelmap);
+    }
   }
 }
 
@@ -92,6 +99,7 @@ void level(char[][] level) {
     //starting the code to make the maps visualized
     fill(255);
     rect(-1,-1,1001,931);
+    int val = 0;
     int startx = 0;
     int currenty = 0;
     for (int i = 0; i < level.length; i++) {
@@ -102,6 +110,7 @@ void level(char[][] level) {
           rect(currentx,currenty,30,30);
         }
         else if (level[i][j] == 'C') {
+          val++;
           fill(0);
           rect(currentx,currenty,30,30);
           //new coin here, so probably make a class or smth for that later.
@@ -123,5 +132,6 @@ void level(char[][] level) {
       }
       currenty += 30;
     }
+    //println(val);
     
 }
