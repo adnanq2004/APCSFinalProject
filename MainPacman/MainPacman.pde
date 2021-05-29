@@ -1,18 +1,66 @@
 import java.util.*;
 import java.io.*;
+PFont f;
+
+//instance variables
+double currentlevel;
+char[][] levelmap;
+int timenow;
 
 void setup() {
-  size(810,930);
-  char[][] level1 = generatemap("./level1.txt");
-  level(level1);
+  size(1000,930);
+  fill(255);
+  rect(-1,-1,1001,931);
+  f = createFont("Arial",24,true);
+  timenow = second();
+  currentlevel = 0;
 }
 
 void draw() {
-  //char[][] level = generatemap("./level1.txt");
-  //level1(level);
-  //fill(#1A17E8);
-  //rect(0,0,30,30);
-  //tests();
+  if (currentlevel == 0) {
+    textFont(f);       
+    fill(0);
+    text("Welcome to Pacman!",width/2-120,height/2-50);
+    //delay(5000);
+    if (second() - timenow >= 3) {
+      fill(255);
+      rect(-1,-1,1001,931);
+      textFont(f);
+      fill(0);
+      text("The Game Will Begin In!",width/2-120,height/2-50);
+      if (second() - timenow >= 4) {
+        text("3..",width/2-5,height/2);
+        if (second() - timenow >= 5) {
+          fill(255);
+          rect(-1,-1,1001,931);
+          textFont(f);
+          fill(0);
+          text("The Game Will Begin In!",width/2-120,height/2-50);
+          text("2..",width/2-5,height/2);
+          if (second() - timenow >= 6) {
+            fill(255);
+            rect(-1,-1,1001,931);
+            textFont(f);
+            fill(0);
+            text("The Game Will Begin In!",width/2-120,height/2-50);
+            text("1..",width/2-5,height/2);
+          }
+          if (second() - timenow >= 7) {
+            currentlevel = 1;
+            fill(255);
+            rect(-1,-1,1001,931);
+          }
+        }
+      }
+    }
+  }
+  if (currentlevel == 1) {
+    levelmap = generatemap("./level1.txt");
+    currentlevel = 1.1;
+  }
+  if (currentlevel == 1.1) {
+    level(levelmap);
+  }
 }
 
 private char[][] generatemap(String filename) {
@@ -40,16 +88,10 @@ private char[][] generatemap(String filename) {
 }
 
 void level(char[][] level) {
-  
-    ////test to see if the level is read correctly
-    //for (char[] a: level) {
-    //  for (char b: a) {
-    //    System.out.print(b);
-    //  }
-    //  System.out.println("");
-    //}
     
-    //actually starting the code to make the maps visualized
+    //starting the code to make the maps visualized
+    fill(255);
+    rect(-1,-1,1001,931);
     int startx = 0;
     int currenty = 0;
     for (int i = 0; i < level.length; i++) {
@@ -81,20 +123,5 @@ void level(char[][] level) {
       }
       currenty += 30;
     }
-    
-    ////testing to see if i can iterate through an array to display shapes
-    //char[][] tests = new char[2][2];
-    //int x = 0;
-    //int y = 0;
-    //for (int i = 0; i < tests.length; i++) {
-    //  for (int j = 0; j < tests.length; j++) {
-    //    fill((float) (Math.random() * 100),(float) (Math.random() * 100),(float) (Math.random() * 100));
-    //    rect(x,y,100,100);
-    //    x+=100;
-    //  }
-    //  x = 0;
-    //  y+=100;
-    //}
-    ////test ended up being positive.
     
 }
