@@ -7,6 +7,7 @@ double currentlevel;
 char[][] levelmap;
 int timenow;
 int collected;
+DemoPlayer player;
 
 void setup() {
   size(1000,930);
@@ -61,11 +62,19 @@ void draw() {
     collected = 0;
   }
   if (currentlevel == 1.1) {
-    if (collected == 251) {
+    if (player.getcollected() == 251) {
+      //println(collected);
+      collected += player.getcollected();
       currentlevel = 2;
     }
     else {
       level(levelmap);
+      player.move();
+      //collected = player.getcollected();
+      levelmap = player.getmap();
+      //if (collected % 10 == 0) {
+      //  println(collected);
+      //}
     }
   }
 }
@@ -123,6 +132,7 @@ void level(char[][] level) {
           //player is gonna go here.
           fill(255);
           ellipse(currentx + 15, currenty + 15, 10,10);
+          player = new DemoPlayer(i,j,level);
         }
         else {
           fill(0);
@@ -132,6 +142,5 @@ void level(char[][] level) {
       }
       currenty += 30;
     }
-    //println(val);
     
 }

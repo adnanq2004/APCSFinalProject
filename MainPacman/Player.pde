@@ -1,5 +1,6 @@
 class Player {
   float x,y;
+  
   Player(float xcoord,float ycoord){
     x = xcoord;
     y = ycoord;
@@ -41,4 +42,5 @@ class Player {
       y+= 5;
     }
   }
+  
 }
