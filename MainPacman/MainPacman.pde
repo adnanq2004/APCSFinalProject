@@ -62,7 +62,7 @@ void draw() {
     collected = 0;
   }
   if (currentlevel == 1.1) {
-    if (player.getcollected() == 251) {
+    if (collected == 251) {
       //println(collected);
       collected += player.getcollected();
       currentlevel = 2;
