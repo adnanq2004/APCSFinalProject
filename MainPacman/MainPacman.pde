@@ -8,7 +8,8 @@ char[][] levelmap;
 int timenow;
 int collected;
 Player player;
-ArrayList<Enemy> enemylist = new ArrayList<Enemy>;
+int lives;
+ArrayList<Enemy> enemylist = new ArrayList<Enemy>();
 
 void setup() {
   size(1000,930);
@@ -61,20 +62,32 @@ void draw() {
     levelmap = generatemap("./level1.txt");
     currentlevel = 1.1;
     collected = 0;
+    lives = 3;
   }
   if (currentlevel == 1.1) {
-    if (player.getcollected() == 251) {
+    if (collected == 251) {
       //println(collected);
       collected += player.getcollected();
       currentlevel = 2;
     }
     else {
+      enemylist.clear();
       level(levelmap);
       player.move();
       //collected = player.getcollected();
-      
       levelmap = player.getmap();
+      for (Enemy e: enemylist) {
+        e.move();
+        levelmap = e.getmap();
+        if (e.getkills()) {
+          lives--;
+        }
+      }
     }
+  }
+  if (currentlevel == 2) {
+    fill(255);
+    rect(-1,-1,1001,931);
   }
 }
 
@@ -131,18 +144,23 @@ void level(char[][] level) {
           //player is gonna go here.
           fill(255);
           ellipse(currentx + 15, currenty + 15, 10,10);
-          player = new DemoPlayer(i,j,level);
+          player = new Player(i,j,level);
         }
         else if (level[i][j] == 'O') {
-          
+          fill(0);
+          rect(currentx,currenty,30,30);
+          fill(#FC1FE3);
+          ellipse(currentx + 15, currenty + 15, 10,10);
+          Enemy newstuff = new Enemy(levelmap, i, j);
+          enemylist.add(newstuff);
         }
         else if (level[i][j] == 'E') {
           fill(0);
           rect(currentx,currenty,30,30);
           fill(#FC1FE3);
           ellipse(currentx + 15, currenty + 15, 10,10);
-          
-          Enemy newstuff = new Enemy()
+          Enemy newstuff = new Enemy(levelmap, i, j);
+          enemylist.add(newstuff);
         }
         else {
           fill(0);
