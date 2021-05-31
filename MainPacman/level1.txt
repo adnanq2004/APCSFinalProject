@@ -1,5 +1,5 @@
 # # # # # # # # # # # # # # # # # # # # # # # # # # #
-# E C C C C C C C C C C C # C C C C C C C C C C C E #
+# E C C C C C C C C C C C # C C C C C C C C C C C C #
 # C # # # # C # # # # # C # C # # # # # C # # # # C #
 # C # # # # C # # # # # C # C # # # # # C # # # # C #
 # C # # # # C # # # # # C # C # # # # # C # # # # C #
@@ -27,5 +27,5 @@
 # C C C C C C # # C C C C # C C C C # # C C C C C C #
 # C # # # # # # # # # # C # C # # # # # # # # # # C #
 # C # # # # # # # # # # C # C # # # # # # # # # # C #
-# E C C C C C C C C C C C C C C C C C C C C C C C E #
+# CC C C C C C C C C C C C C C C C C C C C C C C C#
 # # # # # # # # # # # # # # # # # # # # # # # # # # #

@@ -1,46 +1,88 @@
 class Player {
-  float x,y;
+
+  int x, y;
+  char[][] map;
+  int collected;
   
-  Player(float xcoord,float ycoord){
-    x = xcoord;
-    y = ycoord;
+  Player(int xcor, int ycor, char[][] level){
+    x = xcor;
+    y = ycor;
+    collected = 0;
+    map = level;
   }
   
-  void play() {
-    fill(150,0,100);
-    ellipse(x,y,40,40);
-    keyPressed();
-    walls();
+  void move() {
+    if (keyPressed) {
+      if (key == 'W' || key == 'w') {
+        if (x <= 0 || map[x-1][y] == '#') {
+        }
+        else {
+          if (map[x-1][y] == 'C') {
+            map[x-1][y] = 'P';
+            map[x][y] = '.';
+            collected++;
+          }
+          else {
+            map[x-1][y] = 'P';
+            map[x][y] = '.';
+          }
+        }
+      }
+      else if (key == 'A' || key == 'a') {
+        if (y <= 0 || map[x][y-1] == '#') {
+        }
+        else {
+          if (map[x][y-1] == 'C') {
+            map[x][y-1] = 'P';
+            map[x][y] = '.';
+            collected++;
+          }
+          else {
+            map[x][y-1] = 'P';
+            map[x][y] = '.';
+          }
+        }
+      }
+      else if (key == 'S' || key == 's') {
+        if (x >= map.length-1 || map[x+1][y] == '#') {
+        }
+        else {
+          if (map[x+1][y] == 'C') {
+            map[x+1][y] = 'P';
+            map[x][y] = '.';
+            collected++;
+          }
+          else {
+            map[x+1][y] = 'P';
+            map[x][y] = '.';
+          }
+        }
+      }
+      else if (key == 'D' || key == 'd') {
+        if (y >= map[0].length-1 || map[x][y+1] == '#') {
+        }
+        else {
+          if (map[x][y+1] == 'C') {
+            map[x][y+1] = 'P';
+            map[x][y] = '.';
+            collected++;
+          }
+          else {
+            map[x][y+1] = 'P';
+            map[x][y] = '.';
+          }
+        }
+      } 
+    }
+  
   }
   
-  void walls() {
-    if(x <= 20) {
-      x = 20;
-    }
-    if(y <= 20) {
-      y = 20;
-    }
-    if(x >= 1180) {
-      x = 1180;
-    }
-    if(y >= 580) {
-      y = 580;
-    }
+  int getcollected() {
+    return collected;
   }
   
-  void keyPressed() {
-    if(key == 'a') {
-      x -= 5;
-    }
-    if(key == 'd') {
-      x += 5;
-    }
-    if(key == 'w') {
-      y-= 5;
-    }
-    if(key == 's') {
-      y+= 5;
-    }
+  char[][] getmap() {
+    return map;
   }
-  
+
 }

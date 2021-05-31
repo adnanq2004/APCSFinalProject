@@ -7,7 +7,8 @@ double currentlevel;
 char[][] levelmap;
 int timenow;
 int collected;
-DemoPlayer player;
+Player player;
+ArrayList<Enemy> enemylist = new ArrayList<Enemy>;
 
 void setup() {
   size(1000,930);
@@ -62,7 +63,7 @@ void draw() {
     collected = 0;
   }
   if (currentlevel == 1.1) {
-    if (collected == 251) {
+    if (player.getcollected() == 251) {
       //println(collected);
       collected += player.getcollected();
       currentlevel = 2;
@@ -71,10 +72,8 @@ void draw() {
       level(levelmap);
       player.move();
       //collected = player.getcollected();
+      
       levelmap = player.getmap();
-      //if (collected % 10 == 0) {
-      //  println(collected);
-      //}
     }
   }
 }
@@ -133,6 +132,17 @@ void level(char[][] level) {
           fill(255);
           ellipse(currentx + 15, currenty + 15, 10,10);
           player = new DemoPlayer(i,j,level);
+        }
+        else if (level[i][j] == 'O') {
+          
+        }
+        else if (level[i][j] == 'E') {
+          fill(0);
+          rect(currentx,currenty,30,30);
+          fill(#FC1FE3);
+          ellipse(currentx + 15, currenty + 15, 10,10);
+          
+          Enemy newstuff = new Enemy()
         }
         else {
           fill(0);
