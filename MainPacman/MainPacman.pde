@@ -81,6 +81,7 @@ void draw() {
         levelmap = e.getmap();
         if (e.getkills()) {
           lives--;
+          e.resetkill();
         }
       }
     }
