@@ -7,6 +7,7 @@ double currentlevel;
 char[][] levelmap;
 int timenow;
 int collected;
+int remaining;
 Player player;
 int lives;
 ArrayList<Enemy> enemylist = new ArrayList<Enemy>();
@@ -63,21 +64,22 @@ void draw() {
     currentlevel = 1.1;
     collected = 0;
     lives = 3;
+    remaining = -1;
   }
   if (currentlevel == 1.1) {
-    if (collected == 251) {
+    if (remaining == 0) {
       //println(collected);
       collected += player.getcollected();
       currentlevel = 2;
     }
     else {
       enemylist.clear();
-      level(levelmap);
+      levels(levelmap);
       player.move();
       //collected = player.getcollected();
       levelmap = player.getmap();
       for (Enemy e: enemylist) {
-        e.move();
+        e.move(levelmap);
         levelmap = e.getmap();
         if (e.getkills()) {
           lives--;
@@ -116,7 +118,7 @@ private char[][] generatemap(String filename) {
   
 }
 
-void level(char[][] level) {
+void levels(char[][] level) {
     
     //starting the code to make the maps visualized
     fill(255);
@@ -140,7 +142,6 @@ void level(char[][] level) {
           ellipse(currentx + 15, currenty + 15, 10,10);
         }
         else if (level[i][j] == 'S') {
-          val++;
           fill(0);
           rect(currentx,currenty,30,30);
         }
@@ -161,6 +162,7 @@ void level(char[][] level) {
           player = new Player(i,j,level);
         }
         else if (level[i][j] == 'O') {
+          val++;
           fill(0);
           rect(currentx,currenty,30,30);
           fill(#FC1FE3);
@@ -184,5 +186,6 @@ void level(char[][] level) {
       }
       currenty += 30;
     }
+    remaining = val;
     
 }
