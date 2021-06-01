@@ -14,9 +14,9 @@ int enemymove;
 ArrayList<Enemy> enemylist = new ArrayList<Enemy>();
 
 void setup() {
-  size(1000,930);
+  size(1020,930);
   fill(255);
-  rect(-1,-1,1001,931);
+  rect(-1,-1,1021,931);
   f = createFont("Arial",24,true);
   timenow = second();
   currentlevel = 0;
@@ -24,41 +24,41 @@ void setup() {
 
 void draw() {
   if (currentlevel == 0) {
-    textFont(f);       
+    textFont(f);
     fill(0);
-    text("Welcome to Pacman!",width/2-120,height/2-50);
-    //delay(5000);
-    if (second() - timenow >= 3) {
-      fill(255);
-      rect(-1,-1,1001,931);
-      textFont(f);
-      fill(0);
-      text("The Game Will Begin In!",width/2-120,height/2-50);
-      if (second() - timenow >= 4) {
-        text("3..",width/2-5,height/2);
-        if (second() - timenow >= 5) {
-          fill(255);
-          rect(-1,-1,1001,931);
-          textFont(f);
-          fill(0);
-          text("The Game Will Begin In!",width/2-120,height/2-50);
-          text("2..",width/2-5,height/2);
-          if (second() - timenow >= 6) {
-            fill(255);
-            rect(-1,-1,1001,931);
-            textFont(f);
-            fill(0);
-            text("The Game Will Begin In!",width/2-120,height/2-50);
-            text("1..",width/2-5,height/2);
-          }
-          if (second() - timenow >= 7) {
-            currentlevel = 1;
-            fill(255);
-            rect(-1,-1,1001,931);
-          }
-        }
-      }
-    }
+    currentlevel = 1;
+    //text("Welcome to Pacman!",width/2-120,height/2-50);
+    //if (second() - timenow >= 3) {
+    //  fill(255);
+    //  rect(-1,-1,1021,931);
+    //  textFont(f);
+    //  fill(0);
+    //  text("The Game Will Begin In!",width/2-120,height/2-50);
+    //  if (second() - timenow >= 4) {
+    //    text("3..",width/2-5,height/2);
+    //    if (second() - timenow >= 5) {
+    //      fill(255);
+    //      rect(-1,-1,1021,931);
+    //      textFont(f);
+    //      fill(0);
+    //      text("The Game Will Begin In!",width/2-120,height/2-50);
+    //      text("2..",width/2-5,height/2);
+    //      if (second() - timenow >= 6) {
+    //        fill(255);
+    //        rect(-1,-1,1021,931);
+    //        textFont(f);
+    //        fill(0);
+    //        text("The Game Will Begin In!",width/2-120,height/2-50);
+    //        text("1..",width/2-5,height/2);
+    //      }
+    //      if (second() - timenow >= 7) {
+    //        currentlevel = 1;
+    //        fill(255);
+    //        rect(-1,-1,1021,931);
+    //      }
+    //    }
+    //  }
+    //}
   }
   if (currentlevel == 1) {
     levelmap = generatemap("./level1.txt");
@@ -77,6 +77,7 @@ void draw() {
     else {
       enemylist.clear();
       levels(levelmap);
+      displayothers();
       player.move();
       //collected = player.getcollected();
       levelmap = player.getmap();
@@ -96,13 +97,30 @@ void draw() {
           enemymove = second();
         }
       }
+      if (lives <= 0) {
+        currentlevel = -1;
+      }
     }
   }
   if (currentlevel == 2) {
     fill(255);
-    rect(-1,-1,1001,931);
+    rect(-1,-1,1021,931);
     enemylist.clear();
   }
+  if (currentlevel == -1) {
+    gameover();
+  }
+}
+
+private void displayothers() {
+  f = createFont("Arial",20,true);
+  fill(255);
+  text("DISPLAYS", 850,90);
+  fill(#E8B817);
+  text("Remaining Coins: ", 810,120);
+  text("" + remaining,850,150);
+  fill(#FC001E);
+  text("Lives: " + lives, 850, 210);
 }
 
 private char[][] generatemap(String filename) {
@@ -199,4 +217,10 @@ void levels(char[][] level) {
     }
     remaining = val;
     
+}
+
+void gameover() {
+  fill(255);
+  rect(-1,-1,1021,931);
+  
 }
