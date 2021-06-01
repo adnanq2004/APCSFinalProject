@@ -200,6 +200,7 @@ void levels(char[][] level) {
           vertex(22,4);
           vertex(22,12);
           endShape();
+          stroke(0,0,0);
         }
         else if (level[i][j] == 'P') {
           fill(0);
@@ -220,6 +221,7 @@ void levels(char[][] level) {
           vertex(22,4);
           vertex(22,12);
           endShape();
+          stroke(0,0,0);
         }
         else if (level[i][j] == 'O') {
           val++;
