@@ -189,16 +189,16 @@ void levels(char[][] level) {
           fill(#F50F0F);
           player = new Player(i,j,level);
           stroke(#F50F0F);
-          ellipse(15,15,15,15);
+          ellipse(currentx + 15,currenty + 15,15,15);
           beginShape();
-          vertex(7,12);
-          vertex(7,4);
-          vertex(11,12);
+          vertex(currentx + 7,currenty + 12);
+          vertex(currentx + 7,currenty + 4);
+          vertex(currentx + 11,currenty + 12);
           endShape();
           beginShape();
-          vertex(18,12);
-          vertex(22,4);
-          vertex(22,12);
+          vertex(currentx + 18,currenty + 12);
+          vertex(currentx + 22,currenty + 4);
+          vertex(currentx + 22,currenty + 12);
           endShape();
           stroke(0,0,0);
         }
@@ -210,16 +210,16 @@ void levels(char[][] level) {
           fill(#F50F0F);
           player = new Player(i,j,level);
           stroke(#F50F0F);
-          ellipse(15,15,15,15);
+          ellipse(currentx + 15,currenty + 15,15,15);
           beginShape();
-          vertex(7,12);
-          vertex(7,4);
-          vertex(11,12);
+          vertex(currentx + 7,currenty + 12);
+          vertex(currentx + 7,currenty + 4);
+          vertex(currentx + 11,currenty + 12);
           endShape();
           beginShape();
-          vertex(18,12);
-          vertex(22,4);
-          vertex(22,12);
+          vertex(currentx + 18,currenty + 12);
+          vertex(currentx + 22,currenty + 4);
+          vertex(currentx + 22,currenty + 12);
           endShape();
           stroke(0,0,0);
         }
