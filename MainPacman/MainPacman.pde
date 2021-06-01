@@ -138,6 +138,19 @@ void level(char[][] level) {
           fill(#E8B817);
           ellipse(currentx + 15, currenty + 15, 10,10);
         }
+        else if (level[i][j] == 'S') {
+          val++;
+          fill(0);
+          rect(currentx,currenty,30,30);
+        }
+        else if (level[i][j] == 'R') {
+          fill(0);
+          rect(currentx,currenty,30,30);
+          //player is gonna go here.
+          fill(255);
+          ellipse(currentx + 15, currenty + 15, 10,10);
+          player = new Player(i,j,level);
+        }
         else if (level[i][j] == 'P') {
           fill(0);
           rect(currentx,currenty,30,30);

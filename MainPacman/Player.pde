@@ -12,10 +12,26 @@ class Player {
   }
   
   void move() {
-    if (map[x][y] == 'P') {
-      if (keyPressed) {
-        if (key == 'W' || key == 'w') {
-          if (x <= 0 || map[x-1][y] == '#') {
+    if (keyPressed) {
+      
+      if (key == 'W' || key == 'w') {
+        if (x <= 0 || map[x-1][y] == '#' || map[x-1][y] == 'E' || map[x-1][y] == 'O') {
+        }
+        else {
+          if (map[x][y] == 'R') {
+            if (map[x-1][y] == 'C') {
+              map[x-1][y] = 'P';
+              map[x][y] = 'S';
+              collected++;
+            }
+            else if (map[x-1][y] == 'S') {
+              map[x-1][y] = 'R';
+              map[x][y] = 'S';
+            }
+            else {
+              map[x-1][y] = 'P';
+              map[x][y] = 'S';
+            }
           }
           else {
             if (map[x-1][y] == 'C') {
@@ -23,14 +39,36 @@ class Player {
               map[x][y] = '.';
               collected++;
             }
+            else if (map[x-1][y] == 'S') {
+              map[x-1][y] = 'R';
+              map[x][y] = '.';
+            }
             else {
               map[x-1][y] = 'P';
               map[x][y] = '.';
             }
           }
         }
-        else if (key == 'A' || key == 'a') {
-          if (y <= 0 || map[x][y-1] == '#') {
+      }
+      
+      else if (key == 'A' || key == 'a') {
+        if (y <= 0 || map[x][y-1] == '#' || map[x][y-1] == 'E' || map[x][y-1] == 'O') {
+        }
+        else {
+          if (map[x][y] == 'R') {
+            if (map[x][y-1] == 'C') {
+              map[x][y-1] = 'P';
+              map[x][y] = 'S';
+              collected++;
+            }
+            else if (map[x][y-1] == 'S') {
+              map[x][y-1] = 'R';
+              map[x][y] = 'S';
+            }
+            else {
+              map[x][y-1] = 'P';
+              map[x][y] = 'S';
+            }
           }
           else {
             if (map[x][y-1] == 'C') {
@@ -38,14 +76,36 @@ class Player {
               map[x][y] = '.';
               collected++;
             }
+            else if (map[x][y-1] == 'S') {
+              map[x][y-1] = 'R';
+              map[x][y] = '.';
+            }
             else {
               map[x][y-1] = 'P';
               map[x][y] = '.';
             }
           }
         }
-        else if (key == 'S' || key == 's') {
-          if (x >= map.length-1 || map[x+1][y] == '#') {
+      }
+      
+      else if (key == 'S' || key == 's') {
+        if (x >= map.length-1 || map[x+1][y] == '#' || map[x+1][y] == 'E' || map[x+1][y] == 'O') {
+        }
+        else {
+          if (map[x][y] == 'R') {
+            if (map[x+1][y] == 'C') {
+              map[x+1][y] = 'P';
+              map[x][y] = 'S';
+              collected++;
+            }
+            else if (map[x+1][y] == 'S') {
+              map[x+1][y] = 'R';
+              map[x][y] = 'S';
+            }
+            else {
+              map[x+1][y] = 'P';
+              map[x][y] = 'S';
+            }
           }
           else {
             if (map[x+1][y] == 'C') {
@@ -53,20 +113,46 @@ class Player {
               map[x][y] = '.';
               collected++;
             }
+            else if (map[x+1][y] == 'S') {
+              map[x+1][y] = 'R';
+              map[x][y] = '.';
+            }
             else {
               map[x+1][y] = 'P';
               map[x][y] = '.';
             }
           }
         }
-        else if (key == 'D' || key == 'd') {
-          if (y >= map[0].length-1 || map[x][y+1] == '#') {
+      }
+      
+      else if (key == 'D' || key == 'd') {
+        if (y >= map[0].length-1 || map[x][y+1] == '#' || map[x][y+1] == 'E' || map[x][y+1] == 'O') {
+        }
+        else {
+          if (map[x][y] == 'R') {
+            if (map[x][y+1] == 'C') {
+              map[x][y+1] = 'P';
+              map[x][y] = 'S';
+              collected++;
+            }
+            else if (map[x][y+1] == 'S') {
+              map[x][y+1] = 'R';
+              map[x][y] = 'S';
+            }
+            else {
+              map[x][y+1] = 'P';
+              map[x][y] = 'S';
+            }
           }
           else {
             if (map[x][y+1] == 'C') {
               map[x][y+1] = 'P';
               map[x][y] = '.';
               collected++;
+            }
+            else if (map[x][y+1] == 'S') {
+              map[x][y+1] = 'R';
+              map[x][y] = '.';
             }
             else {
               map[x][y+1] = 'P';
@@ -75,70 +161,7 @@ class Player {
           }
         }
       }
-    }
-    else if (map[x][y] == 'R') {
-      if (keyPressed) {
-        if (key == 'W' || key == 'w') {
-          if (x <= 0 || map[x-1][y] == '#') {
-          }
-          else {
-            if (map[x-1][y] == 'C') {
-              map[x-1][y] = 'P';
-              map[x][y] = '.';
-              collected++;
-            }
-            else {
-              map[x-1][y] = 'P';
-              map[x][y] = '.';
-            }
-          }
-        }
-        else if (key == 'A' || key == 'a') {
-          if (y <= 0 || map[x][y-1] == '#') {
-          }
-          else {
-            if (map[x][y-1] == 'C') {
-              map[x][y-1] = 'P';
-              map[x][y] = '.';
-              collected++;
-            }
-            else {
-              map[x][y-1] = 'P';
-              map[x][y] = '.';
-            }
-          }
-        }
-        else if (key == 'S' || key == 's') {
-          if (x >= map.length-1 || map[x+1][y] == '#') {
-          }
-          else {
-            if (map[x+1][y] == 'C') {
-              map[x+1][y] = 'P';
-              map[x][y] = '.';
-              collected++;
-            }
-            else {
-              map[x+1][y] = 'P';
-              map[x][y] = '.';
-            }
-          }
-        }
-        else if (key == 'D' || key == 'd') {
-          if (y >= map[0].length-1 || map[x][y+1] == '#') {
-          }
-          else {
-            if (map[x][y+1] == 'C') {
-              map[x][y+1] = 'P';
-              map[x][y] = '.';
-              collected++;
-            }
-            else {
-              map[x][y+1] = 'P';
-              map[x][y] = '.';
-            }
-          }
-        }
-      }
+      
     }
   
   }

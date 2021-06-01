@@ -9,7 +9,7 @@ public class Enemy{
   int y;
   int time;
   boolean gotkill;
-  //String direction;
+  String direction;
   
   Enemy(char[][] map, int xcor, int ycor) {
     //pos = startpos;
@@ -24,49 +24,81 @@ public class Enemy{
   }
   
   void move() {
-    if(second() - time >= 1) {
-      String finalpath;
-      int possiblepaths = 0;;
-      ArrayList<String> paths = new ArrayList<String>();
-      if (x > 0 && (level[x-1][y] != '#' && level[x-1][y] != 'S')) {
-        possiblepaths++;
-        paths.add("up");
-      }
-      if (y > 0 && (level[x][y-1] != '#' && level[x][y-1] != 'S')) {
-        possiblepaths++;
-        paths.add("left");
-      }
-      if (x < level.length-1 && (level[x+1][y] != '#' && level[x+1][y] != 'S')) {
-        possiblepaths++;
-        paths.add("down");
-      }
-      if (y < level[0].length-1 && (level[x][y+1] != '#' && level[x][y+1] != 'S')) {
-        possiblepaths++;
-        paths.add("right");
-      }
-      if (paths.size() > 1) {
-        Random rand = new Random();
-        int int_random = rand.nextInt(possiblepaths);
-        finalpath = paths.get(int_random);
-      }
-      else {
-        finalpath = paths.get(0);
-      }
+    //if(second() - time >= 1) {
+    //  String finalpath;
+    //  int possiblepaths = 0;;
+    //  ArrayList<String> paths = new ArrayList<String>();
+    //  if (x > 0 && (level[x-1][y] != '#' && level[x-1][y] != 'S')) {
+    //    possiblepaths++;
+    //    paths.add("up");
+    //  }
+    //  if (y > 0 && (level[x][y-1] != '#' && level[x][y-1] != 'S')) {
+    //    possiblepaths++;
+    //    paths.add("left");
+    //  }
+    //  if (x < level.length-1 && (level[x+1][y] != '#' && level[x+1][y] != 'S')) {
+    //    possiblepaths++;
+    //    paths.add("down");
+    //  }
+    //  if (y < level[0].length-1 && (level[x][y+1] != '#' && level[x][y+1] != 'S')) {
+    //    possiblepaths++;
+    //    paths.add("right");
+    //  }
+    //  if (paths.size() == 2) {
+    //    String opposite = "";
+    //    if (direction == "up") {
+    //      opposite = "down";
+    //    }
+    //    if (direction == "down") {
+    //      opposite = "up";
+    //    }
+    //    if (direction == "left") {
+    //      opposite = "right";
+    //    }
+    //    if (direction == "right") {
+    //      opposite = "left";
+    //    }
+    //    paths.remove(paths.indexOf(opposite));
+    //    finalpath = paths.get(0);
+    //  }
+    //  else if (paths.size() > 2) {
+    //    String opposite = "";
+    //    if (direction == "up") {
+    //      opposite = "down";
+    //    }
+    //    if (direction == "down") {
+    //      opposite = "up";
+    //    }
+    //    if (direction == "left") {
+    //      opposite = "right";
+    //    }
+    //    if (direction == "right") {
+    //      opposite = "left";
+    //    }
+    //    paths.remove(paths.indexOf(opposite));
+    //    possiblepaths--;
+    //    Random rand = new Random();
+    //    int int_random = rand.nextInt(possiblepaths);
+    //    finalpath = paths.get(int_random);
+    //  }
+    //  else {
+    //    finalpath = paths.get(0);
+    //  }
       
-      if (finalpath == "up") {
-        step(x-1,y);
-      }
-      else if (finalpath == "left") {
-        step(x,y-1);
-      }
-      else if (finalpath == "down") {
-        step(x+1,y);
-      }
-      else if (finalpath == "right") {
-        step(x,y+1);
-      }
+    //  if (finalpath == "up") {
+    //    step(x-1,y);
+    //  }
+    //  else if (finalpath == "left") {
+    //    step(x,y-1);
+    //  }
+    //  else if (finalpath == "down") {
+    //    step(x+1,y);
+    //  }
+    //  else if (finalpath == "right") {
+    //    step(x,y+1);
+    //  }
       
-    }
+    //}
   }
   
   void step(int xval, int yval) {
