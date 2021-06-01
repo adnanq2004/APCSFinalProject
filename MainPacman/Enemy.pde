@@ -9,7 +9,7 @@ public class Enemy{
   int y;
   int time;
   boolean gotkill;
-  String direction;
+  //string direction;
   
   Enemy(char[][] map, int xcor, int ycor) {
     //pos = startpos;
@@ -24,6 +24,7 @@ public class Enemy{
   }
   
   void move() {
+    
     //if(second() - time >= 1) {
     //  String finalpath;
     //  int possiblepaths = 0;;
@@ -84,7 +85,6 @@ public class Enemy{
     //  else {
     //    finalpath = paths.get(0);
     //  }
-      
     //  if (finalpath == "up") {
     //    step(x-1,y);
     //  }
@@ -98,7 +98,6 @@ public class Enemy{
     //    step(x,y+1);
     //  }
       
-    //}
   }
   
   void step(int xval, int yval) {
