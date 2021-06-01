@@ -12,6 +12,7 @@ int remaining;
 Player player;
 int lives;
 int enemymove;
+int playermove;
 ArrayList<Enemy> enemylist = new ArrayList<Enemy>();
 
 void setup() {
@@ -68,7 +69,8 @@ void draw() {
     collecting = 0;
     lives = 3;
     remaining = -1;
-    enemymove = second();
+    enemymove = millis();
+    playermove = millis();
   }
   if (currentlevel == 1.1) {
     if (remaining == 0) {
@@ -80,15 +82,23 @@ void draw() {
       enemylist.clear();
       levels(levelmap);
       displayothers();
-      player.move();
-      collecting = player.getcollected();
-      collected += collecting;
-      levelmap = player.getmap();
-      if (enemymove > second()) {
-        enemymove = second();
+      if (playermove > millis()) {
+        playermove = millis();
       }
       else {
-        if (second() - enemymove >= .1) {
+        if (millis() - playermove >= 250) {
+          player.move();
+          collecting = player.getcollected();
+          collected += collecting;
+          levelmap = player.getmap();
+          playermove = millis();
+        }
+      }
+      if (enemymove > millis()) {
+        enemymove = millis();
+      }
+      else {
+        if (millis() - enemymove >= 500) {
           for (Enemy e: enemylist) {
             e.move(levelmap);
             levelmap = e.getmap();
@@ -97,7 +107,7 @@ void draw() {
               e.resetkill();
             }
           }
-          enemymove = second();
+          enemymove = millis();
         }
       }
       if (lives <= 0) {
