@@ -80,16 +80,21 @@ void draw() {
       player.move();
       //collected = player.getcollected();
       levelmap = player.getmap();
-      if (second() - enemymove >= .1) {
-        for (Enemy e: enemylist) {
-          e.move(levelmap);
-          levelmap = e.getmap();
-          if (e.getkills()) {
-            lives--;
-            e.resetkill();
-          }
-        }
+      if (enemymove > second()) {
         enemymove = second();
+      }
+      else {
+        if (second() - enemymove >= .1) {
+          for (Enemy e: enemylist) {
+            e.move(levelmap);
+            levelmap = e.getmap();
+            if (e.getkills()) {
+              lives--;
+              e.resetkill();
+            }
+          }
+          enemymove = second();
+        }
       }
     }
   }
