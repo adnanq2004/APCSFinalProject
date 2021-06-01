@@ -193,17 +193,55 @@ void levels(char[][] level) {
         else if (level[i][j] == 'O') {
           val++;
           fill(0);
+          stroke(0,0,0);
           rect(currentx,currenty,30,30);
           fill(#FC1FE3);
-          ellipse(currentx + 15, currenty + 15, 10,10);
+          stroke(#FC1FE3);
+          ellipse(currentx + 15,currenty + 15, 15,15);
+          beginShape();
+          vertex(currentx + 8, currenty + 18);
+          vertex(currentx + 8,currenty + 28);
+          vertex(currentx + 15,currenty + 18);
+          vertex(currentx + 15,currenty + 18);
+          vertex(currentx + 22,currenty + 28);
+          vertex(currentx + 22,currenty + 18);
+          endShape();
+          beginShape();
+          vertex(currentx + 10,currenty + 18);
+          vertex(currentx + 15,currenty + 28);
+          vertex(currentx + 20,currenty + 18);
+          endShape();
+          fill(0,0,0);
+          ellipse(currentx + 10,currenty + 15,5,5);
+          ellipse(currentx + 20,currenty + 15,5,5);
+          stroke(0,0,0);
           Enemy newstuff = new Enemy(levelmap, i, j);
           enemylist.add(newstuff);
         }
         else if (level[i][j] == 'E') {
           fill(0);
           rect(currentx,currenty,30,30);
+          stroke(0,0,0);
           fill(#FC1FE3);
-          ellipse(currentx + 15, currenty + 15, 10,10);
+          stroke(#FC1FE3);
+          ellipse(currentx + 15,currenty + 15, 15,15);
+          beginShape();
+          vertex(currentx + 8, currenty + 18);
+          vertex(currentx + 8,currenty + 28);
+          vertex(currentx + 15,currenty + 18);
+          vertex(currentx + 15,currenty + 18);
+          vertex(currentx + 22,currenty + 28);
+          vertex(currentx + 22,currenty + 18);
+          endShape();
+          beginShape();
+          vertex(currentx + 10,currenty + 18);
+          vertex(currentx + 15,currenty + 28);
+          vertex(currentx + 20,currenty + 18);
+          endShape();
+          fill(0,0,0);
+          ellipse(currentx + 10,currenty + 15,5,5);
+          ellipse(currentx + 20,currenty + 15,5,5);
+          stroke(0,0,0);
           Enemy newstuff = new Enemy(levelmap, i, j);
           enemylist.add(newstuff);
         }
