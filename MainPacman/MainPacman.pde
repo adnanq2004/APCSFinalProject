@@ -7,6 +7,7 @@ double currentlevel;
 char[][] levelmap;
 int timenow;
 int collected;
+int collecting;
 int remaining;
 Player player;
 int lives;
@@ -26,44 +27,45 @@ void draw() {
   if (currentlevel == 0) {
     textFont(f);
     fill(0);
-    currentlevel = 1;
-    //text("Welcome to Pacman!",width/2-120,height/2-50);
-    //if (second() - timenow >= 3) {
-    //  fill(255);
-    //  rect(-1,-1,1021,931);
-    //  textFont(f);
-    //  fill(0);
-    //  text("The Game Will Begin In!",width/2-120,height/2-50);
-    //  if (second() - timenow >= 4) {
-    //    text("3..",width/2-5,height/2);
-    //    if (second() - timenow >= 5) {
-    //      fill(255);
-    //      rect(-1,-1,1021,931);
-    //      textFont(f);
-    //      fill(0);
-    //      text("The Game Will Begin In!",width/2-120,height/2-50);
-    //      text("2..",width/2-5,height/2);
-    //      if (second() - timenow >= 6) {
-    //        fill(255);
-    //        rect(-1,-1,1021,931);
-    //        textFont(f);
-    //        fill(0);
-    //        text("The Game Will Begin In!",width/2-120,height/2-50);
-    //        text("1..",width/2-5,height/2);
-    //      }
-    //      if (second() - timenow >= 7) {
-    //        currentlevel = 1;
-    //        fill(255);
-    //        rect(-1,-1,1021,931);
-    //      }
-    //    }
-    //  }
-    //}
+    //currentlevel = 1;
+    text("Welcome to Pacman!",width/2-120,height/2-50);
+    if (second() - timenow >= 3) {
+      fill(255);
+      rect(-1,-1,1021,931);
+      textFont(f);
+      fill(0);
+      text("The Game Will Begin In!",width/2-120,height/2-50);
+      if (second() - timenow >= 4) {
+        text("3..",width/2-5,height/2);
+        if (second() - timenow >= 5) {
+          fill(255);
+          rect(-1,-1,1021,931);
+          textFont(f);
+          fill(0);
+          text("The Game Will Begin In!",width/2-120,height/2-50);
+          text("2..",width/2-5,height/2);
+          if (second() - timenow >= 6) {
+            fill(255);
+            rect(-1,-1,1021,931);
+            textFont(f);
+            fill(0);
+            text("The Game Will Begin In!",width/2-120,height/2-50);
+            text("1..",width/2-5,height/2);
+          }
+          if (second() - timenow >= 7) {
+            currentlevel = 1;
+            fill(255);
+            rect(-1,-1,1021,931);
+          }
+        }
+      }
+    }
   }
   if (currentlevel == 1) {
     levelmap = generatemap("./level1.txt");
     currentlevel = 1.1;
     collected = 0;
+    collecting = 0;
     lives = 3;
     remaining = -1;
     enemymove = second();
@@ -79,7 +81,8 @@ void draw() {
       levels(levelmap);
       displayothers();
       player.move();
-      //collected = player.getcollected();
+      collecting = player.getcollected();
+      collected += collecting;
       levelmap = player.getmap();
       if (enemymove > second()) {
         enemymove = second();
@@ -121,6 +124,10 @@ private void displayothers() {
   text("" + remaining,850,150);
   fill(#FC001E);
   text("Lives: " + lives, 850, 210);
+  fill(#E8B817);
+  text("Collected Coins: ", 820,270);
+  int collect = collected + collecting;
+  text("" + collect,850,300);
 }
 
 private char[][] generatemap(String filename) {
@@ -222,5 +229,6 @@ void levels(char[][] level) {
 void gameover() {
   fill(255);
   rect(-1,-1,1021,931);
-  
+  fill(0);
+  text("Congrats, you died, you failure.", width/2-180, height/2-50);
 }
