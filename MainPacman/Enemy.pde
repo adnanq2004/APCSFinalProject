@@ -22,7 +22,7 @@ public class Enemy{
   
   void move(char[][] ma) {
     level = ma;
-    //if(second() - time >= .0000000001) {
+    //if(second() - time >= .5) {
       String finalpath;
       int possiblepaths = 0;
       ArrayList<String> paths = new ArrayList<String>();
@@ -89,7 +89,10 @@ public class Enemy{
         }
         else {
           paths.remove(paths.indexOf(opposite));
-          finalpath = paths.get(0);
+          possiblepaths--;
+          Random rand = new Random();
+          int int_random = rand.nextInt(possiblepaths);
+          finalpath = paths.get(int_random);
         }
       }
       
@@ -109,6 +112,7 @@ public class Enemy{
       else if (finalpath == "right") {
         step(level,x,y+1);
       }
+      direction = finalpath;
     //  time = second();
     //}
   }
@@ -125,6 +129,10 @@ public class Enemy{
         level[x][y] = 'C';
         level[xval][yval] = 'O';
       }
+      else if (level[xval][yval] == '.') {
+        level[x][y] = 'C';
+        level[xval][yval] = 'E';
+      }
     }
     else {
       if (level[xval][yval] == 'P') {
@@ -136,6 +144,10 @@ public class Enemy{
       else if (level[xval][yval] == 'C') {
         level[x][y] = '.';
         level[xval][yval] = 'O';
+      }
+      else if (level[xval][yval] == '.') {
+        level[x][y] = '.';
+        level[xval][yval] = 'E';
       }
     }
   }

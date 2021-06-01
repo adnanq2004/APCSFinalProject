@@ -91,6 +91,7 @@ void draw() {
   if (currentlevel == 2) {
     fill(255);
     rect(-1,-1,1001,931);
+    enemylist.clear();
   }
 }
 
