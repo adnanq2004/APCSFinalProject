@@ -10,7 +10,7 @@ Adnan Quayyum, Eric Guo
 
 [Brief Description]
 The overall project is gonna be mainly a Pacman clone. You start off in the center of the screen, and must navigate through a maze full of collectibles, just like in Pacman, and you must collect all of the collectibles on a level to move on. Enemies will exist that may kill you. If you die, you will be sent back to the center of the maze, and your life counter will tick down by one. Once your life counter reaches 0, a “Game Over” screen will be displayed, and the player will probably have an option to play again from the first level. The player will most likely be able to outspeed the enemies, but will need to perfectly maneuver around the board.
-
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 [Development Logs]
 May 25, 2021
 [Adnan] Working on making Pacman level on Processing. I tried to make each tile in Pacman about a 20 by 20 tile on processing, but didn’t make much progress.
