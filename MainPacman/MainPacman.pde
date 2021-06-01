@@ -10,6 +10,7 @@ int collected;
 int remaining;
 Player player;
 int lives;
+int enemymove;
 ArrayList<Enemy> enemylist = new ArrayList<Enemy>();
 
 void setup() {
@@ -65,6 +66,7 @@ void draw() {
     collected = 0;
     lives = 3;
     remaining = -1;
+    enemymove = second();
   }
   if (currentlevel == 1.1) {
     if (remaining == 0) {
@@ -78,19 +80,23 @@ void draw() {
       player.move();
       //collected = player.getcollected();
       levelmap = player.getmap();
-      for (Enemy e: enemylist) {
-        e.move(levelmap);
-        levelmap = e.getmap();
-        if (e.getkills()) {
-          lives--;
-          e.resetkill();
+      if (second() - enemymove >= .1) {
+        for (Enemy e: enemylist) {
+          e.move(levelmap);
+          levelmap = e.getmap();
+          if (e.getkills()) {
+            lives--;
+            e.resetkill();
+          }
         }
+        enemymove = second();
       }
     }
   }
   if (currentlevel == 2) {
     fill(255);
     rect(-1,-1,1001,931);
+    enemylist.clear();
   }
 }
 

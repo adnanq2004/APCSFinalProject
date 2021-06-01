@@ -22,95 +22,96 @@ public class Enemy{
   
   void move(char[][] ma) {
     level = ma;
-    //if(second() - time >= .0000000001) {
-      String finalpath;
-      int possiblepaths = 0;
-      ArrayList<String> paths = new ArrayList<String>();
-      if ((x > 0 && (level[x-1][y] != '#' && level[x-1][y] != 'S')) || (level[x-1][y] == 'P' || level[x-1][y] == '.')) {
-        possiblepaths++;
-        paths.add("up");
+    String finalpath;
+    int possiblepaths = 0;
+    ArrayList<String> paths = new ArrayList<String>();
+    if ((x > 0 && (level[x-1][y] != '#' && level[x-1][y] != 'S')) || (level[x-1][y] == 'P' || level[x-1][y] == '.')) {
+      possiblepaths++;
+      paths.add("up");
+    }
+    if ((y > 0 && (level[x][y-1] != '#' && level[x][y-1] != 'S')) || (level[x][y-1] == 'P' || level[x][y-1] == '.')) {
+      possiblepaths++;
+      paths.add("left");
+    }
+    if ((x < level.length-1 && (level[x+1][y] != '#' && level[x+1][y] != 'S')) || (level[x+1][y] == 'P' || level[x+1][y] == '.')) {
+      possiblepaths++;
+      paths.add("down");
+    }
+    if ((y < level[0].length-1 && (level[x][y+1] != '#' && level[x][y+1] != 'S')) || (level[x][y+1] == 'P' || level[x][y+1] == '.')) {
+      possiblepaths++;
+      paths.add("right");
+    }
+    
+    if (paths.size() == 2) {
+      String opposite = "";
+      if (direction == "up") {
+        opposite = "down";
       }
-      if ((y > 0 && (level[x][y-1] != '#' && level[x][y-1] != 'S')) || (level[x][y-1] == 'P' || level[x][y-1] == '.')) {
-        possiblepaths++;
-        paths.add("left");
+      if (direction == "down") {
+        opposite = "up";
       }
-      if ((x < level.length-1 && (level[x+1][y] != '#' && level[x+1][y] != 'S')) || (level[x+1][y] == 'P' || level[x+1][y] == '.')) {
-        possiblepaths++;
-        paths.add("down");
+      if (direction == "left") {
+        opposite = "right";
       }
-      if ((y < level[0].length-1 && (level[x][y+1] != '#' && level[x][y+1] != 'S')) || (level[x][y+1] == 'P' || level[x][y+1] == '.')) {
-        possiblepaths++;
-        paths.add("right");
+      if (direction == "right") {
+        opposite = "left";
       }
-      
-      if (paths.size() == 2) {
-        String opposite = "";
-        if (direction == "up") {
-          opposite = "down";
-        }
-        if (direction == "down") {
-          opposite = "up";
-        }
-        if (direction == "left") {
-          opposite = "right";
-        }
-        if (direction == "right") {
-          opposite = "left";
-        }
-        if (paths.indexOf(opposite) == -1) {
-          Random rand = new Random();
-          int int_random = rand.nextInt(possiblepaths);
-          finalpath = paths.get(int_random);
-        }
-        else {
-          paths.remove(paths.indexOf(opposite));
-          finalpath = paths.get(0);
-        }
+      if (paths.indexOf(opposite) == -1) {
+        Random rand = new Random();
+        int int_random = rand.nextInt(possiblepaths);
+        finalpath = paths.get(int_random);
       }
-      
-      else if (paths.size() > 2) {
-        String opposite = "";
-        if (direction == "up") {
-          opposite = "down";
-        }
-        if (direction == "down") {
-          opposite = "up";
-        }
-        if (direction == "left") {
-          opposite = "right";
-        }
-        if (direction == "right") {
-          opposite = "left";
-        }
-        if (paths.indexOf(opposite) == -1) {
-          Random rand = new Random();
-          int int_random = rand.nextInt(possiblepaths);
-          finalpath = paths.get(int_random);
-        }
-        else {
-          paths.remove(paths.indexOf(opposite));
-          finalpath = paths.get(0);
-        }
-      }
-      
       else {
+        paths.remove(paths.indexOf(opposite));
         finalpath = paths.get(0);
       }
-      
-      if (finalpath == "up") {
-        step(level,x-1,y);
+    }
+    
+    else if (paths.size() > 2) {
+      String opposite = "";
+      if (direction == "up") {
+        opposite = "down";
       }
-      else if (finalpath == "left") {
-        step(level,x,y-1);
+      if (direction == "down") {
+        opposite = "up";
       }
-      else if (finalpath == "down") {
-        step(level,x+1,y);
+      if (direction == "left") {
+        opposite = "right";
       }
-      else if (finalpath == "right") {
-        step(level,x,y+1);
+      if (direction == "right") {
+        opposite = "left";
       }
-    //  time = second();
-    //}
+      if (paths.indexOf(opposite) == -1) {
+        Random rand = new Random();
+        int int_random = rand.nextInt(possiblepaths);
+        finalpath = paths.get(int_random);
+      }
+      else {
+        paths.remove(paths.indexOf(opposite));
+        possiblepaths--;
+        Random rand = new Random();
+        int int_random = rand.nextInt(possiblepaths);
+        finalpath = paths.get(int_random);
+      }
+    }
+    
+    else {
+      finalpath = paths.get(0);
+    }
+    
+    if (finalpath == "up") {
+      step(level,x-1,y);
+    }
+    else if (finalpath == "left") {
+      step(level,x,y-1);
+    }
+    else if (finalpath == "down") {
+      step(level,x+1,y);
+    }
+    else if (finalpath == "right") {
+      step(level,x,y+1);
+    }
+    direction = finalpath;
   }
   
   void step(char[][] level, int xval, int yval) {
@@ -125,6 +126,10 @@ public class Enemy{
         level[x][y] = 'C';
         level[xval][yval] = 'O';
       }
+      else if (level[xval][yval] == '.') {
+        level[x][y] = 'C';
+        level[xval][yval] = 'E';
+      }
     }
     else {
       if (level[xval][yval] == 'P') {
@@ -136,6 +141,10 @@ public class Enemy{
       else if (level[xval][yval] == 'C') {
         level[x][y] = '.';
         level[xval][yval] = 'O';
+      }
+      else if (level[xval][yval] == '.') {
+        level[x][y] = '.';
+        level[xval][yval] = 'E';
       }
     }
   }
