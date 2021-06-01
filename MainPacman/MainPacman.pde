@@ -184,18 +184,36 @@ void levels(char[][] level) {
         else if (level[i][j] == 'R') {
           fill(0);
           rect(currentx,currenty,30,30);
-          //player is gonna go here.
-          fill(255);
-          ellipse(currentx + 15, currenty + 15, 10,10);
-          player = new Player(i,j,level);
+          //player is gonna go here.fill(#F50F0F);
+           stroke(#F50F0F);
+           ellipse(15,15,15,15);
+           beginShape();
+           vertex(7,12);
+           vertex(7,4);
+           vertex(11,12);
+           endShape();
+           beginShape();
+           vertex(18,12);
+           vertex(22,4);
+           vertex(22,12);
+           endShape();
         }
         else if (level[i][j] == 'P') {
           fill(0);
           rect(currentx,currenty,30,30);
           //player is gonna go here.
-          fill(255);
-          ellipse(currentx + 15, currenty + 15, 10,10);
-          player = new Player(i,j,level);
+          stroke(#F50F0F);
+           ellipse(15,15,15,15);
+           beginShape();
+           vertex(7,12);
+           vertex(7,4);
+           vertex(11,12);
+           endShape();
+           beginShape();
+           vertex(18,12);
+           vertex(22,4);
+           vertex(22,12);
+           endShape();
         }
         else if (level[i][j] == 'O') {
           val++;
