@@ -28,7 +28,6 @@ void draw() {
   if (currentlevel == 0) {
     textFont(f);
     fill(0);
-    //currentlevel = 1;
     text("Welcome to Pacman!",width/2-120,height/2-50);
     if (second() - timenow >= 3) {
       fill(255);
@@ -77,6 +76,8 @@ void draw() {
       //println(collected);
       collected += player.getcollected();
       currentlevel = 2;
+      timenow = millis();
+      lives++;
     }
     else {
       enemylist.clear();
@@ -86,7 +87,7 @@ void draw() {
         playermove = millis();
       }
       else {
-        if (millis() - playermove >= 250) {
+        if (millis() - playermove >= 125) {
           player.move();
           collecting = player.getcollected();
           collected += collecting;
@@ -98,7 +99,7 @@ void draw() {
         enemymove = millis();
       }
       else {
-        if (millis() - enemymove >= 500) {
+        if (millis() - enemymove >= 375) {
           for (Enemy e: enemylist) {
             e.move(levelmap);
             levelmap = e.getmap();
@@ -119,6 +120,10 @@ void draw() {
     fill(255);
     rect(-1,-1,1021,931);
     enemylist.clear();
+    victory((int) currentlevel);
+    if (millis() - timenow >= 5000) {
+      currentlevel++;
+    }
   }
   if (currentlevel == -1) {
     gameover();
@@ -130,7 +135,7 @@ private void displayothers() {
   fill(255);
   text("DISPLAYS", 850,90);
   fill(#E8B817);
-  text("Remaining Coins: ", 810,120);
+  text("Remaining Coins: ", 820,120);
   text("" + remaining,850,150);
   fill(#FC001E);
   text("Lives: " + lives, 850, 210);
@@ -164,7 +169,7 @@ private char[][] generatemap(String filename) {
   
 }
 
-void levels(char[][] level) {
+private void levels(char[][] level) {
     
     //starting the code to make the maps visualized
     fill(255);
@@ -300,9 +305,20 @@ void levels(char[][] level) {
     
 }
 
-void gameover() {
+private void gameover() {
   fill(255);
   rect(-1,-1,1021,931);
   fill(0);
-  text("Congrats, you died, you failure.", width/2-180, height/2-50);
+  PImage duck = loadImage("angryduck.png");
+  image(duck, width/2 - duck.width/2, height/2 - duck.height/2);
+  text("Congrats, you died, you utter failure.", width/2-180, height/2 - duck.height/2-50);
+}
+
+private void victory(int num) {
+  fill(255);
+  rect(-1,-1,1021,931);
+  fill(0);
+  PImage duck = loadImage("happyduck" + (int)num + ".png");
+  image(duck, width/2 - duck.width/2, height/2 - duck.height/2);
+  text("Good job. You didn't die! Feel free to enjoy this duck for a bit, then lets move on, shall we?", width/2-480, height/2 - duck.height/2-50);
 }
