@@ -36,4 +36,6 @@ May 31, 2021
 [Adnan] Enemies aren’t being as dumb. They can now walk on blank spaces, and move in one direction for the most part. I also edited the Player method so that they treat safe zones correctly, and can’t step on enemy tiles.
 [Eric] The timings of the enemies are not unbearably slow, they can all coexist and move at a reasonable speed however randomly stop moving and might just not move again, I will need to investigate the cause of this in the future. 
 
-
+June 1, 2021
+[Adnan] I added to the interface features a bit. The number of coins to collect, as well as the coins collected are displayed perfectly. There is also a health system, where you can in fact lose the game. There is also a death and victory screen now. The enemy and player movements were also updated/limited. The player is able to move at three times to speed, but can suffer from input delay.
+[Eric] Designed new plyaer and enemy sprites.
