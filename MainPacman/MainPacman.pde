@@ -21,7 +21,8 @@ void setup() {
   rect(-1,-1,1021,931);
   f = createFont("Arial",24,true);
   timenow = second();
-  currentlevel = 0;
+  currentlevel = 1;
+  textFont(f);
 }
 
 void draw() {
@@ -133,16 +134,42 @@ void draw() {
 private void displayothers() {
   f = createFont("Arial",20,true);
   fill(255);
-  text("DISPLAYS", 850,90);
+  fill(0,255,0);
+  stroke(0,255,0);
+  rect(810,0,800,10);
+  rect(810,10,10,920);
+  rect(810,920,800,10);
+  rect(1010,10,10,920);
+  stroke(0,0,0);
+  fill(255,255,255);
+  text("LEVEL 1", 865, 30);
+  text("Invasion", 865, 60);
   fill(#E8B817);
   text("Remaining Coins: ", 820,120);
-  text("" + remaining,850,150);
+  text("" + remaining,890,150);
+  ellipse(870,140,25,25);
+  ellipse(870,140,15,15);
+  line(870,135,870,145);
   fill(#FC001E);
-  text("Lives: " + lives, 850, 210);
+  text("Lives: " + lives, 865, 210);
+  stroke(#FC001E);
+  ellipse(960,195,15,15);
+  ellipse(976,195,15,15);
+  beginShape();
+  vertex(951,195);
+  vertex(968,220);
+  vertex(984,195);
+  endShape();
+  stroke(0,0,0);
   fill(#E8B817);
-  text("Collected Coins: ", 820,270);
+  text("Collected Coins: ", 830,270);
   int collect = collected;
-  text("" + collect,850,300);
+  text("" + collect,890,300);
+  fill(#E8B817);
+  ellipse(870,290,25,25);
+  ellipse(870,290,15,15);
+  line(870,285,870,295);
+  fill(0,0,0);
 }
 
 private char[][] generatemap(String filename) {
