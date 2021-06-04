@@ -43,3 +43,6 @@ June 1, 2021
 June 3, 2021
 [Eric] Designed a better UI system to display stats like current level, remaining coins, coins collected, and lives remaining.
 [Adnan] Adjusted player and enemy speed and edited some text on the death screen. Also updated the UML Diagram.
+
+June 4, 2021
+[Adnan AND Eric] Worked together to design 2nd level for pacman, and also draw ideas for new enemy type. 
