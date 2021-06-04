@@ -38,4 +38,8 @@ May 31, 2021
 
 June 1, 2021
 [Adnan] I added to the interface features a bit. The number of coins to collect, as well as the coins collected are displayed perfectly. There is also a health system, where you can in fact lose the game. There is also a death and victory screen now. The enemy and player movements were also updated/limited. The player is able to move at three times to speed, but can suffer from input delay.
-[Eric] Designed new plyaer and enemy sprites.
+[Eric] Designed new player and enemy sprites. Player looks like a red demon cat head, and enemies look like alien-based tentacle monsters, somewhat loyal to the original design.
+
+June 3, 2021
+[Eric] Designed a better UI system to display stats like current level, remaining coins, coins collected, and lives remaining.
+[Adnan] Adjusted player and enemy speed and edited some text on the death screen. Also updated the UML Diagram.
