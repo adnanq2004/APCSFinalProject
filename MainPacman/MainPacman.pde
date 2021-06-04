@@ -67,7 +67,7 @@ void draw() {
     currentlevel = 1.1;
     collected = 0;
     collecting = 0;
-    lives = 3;
+    lives = 0;
     remaining = -1;
     enemymove = millis();
     playermove = millis();
@@ -88,7 +88,7 @@ void draw() {
         playermove = millis();
       }
       else {
-        if (millis() - playermove >= 125) {
+        if (millis() - playermove >= 75) {
           player.move();
           collecting = player.getcollected();
           collected += collecting;
@@ -100,7 +100,7 @@ void draw() {
         enemymove = millis();
       }
       else {
-        if (millis() - enemymove >= 375) {
+        if (millis() - enemymove >= 225) {
           for (Enemy e: enemylist) {
             e.move(levelmap);
             levelmap = e.getmap();
@@ -338,7 +338,7 @@ private void gameover() {
   fill(0);
   PImage duck = loadImage("angryduck.png");
   image(duck, width/2 - duck.width/2, height/2 - duck.height/2);
-  text("Congrats, you died, you utter failure.", width/2-180, height/2 - duck.height/2-50);
+  text("Congrats, you have been thrown out the airlock.", width/2-180-55, height/2 - duck.height/2-50);
 }
 
 private void victory(int num) {
