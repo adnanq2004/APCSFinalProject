@@ -26,48 +26,48 @@ void setup() {
 }
 
 void draw() {
-  if (currentlevel == 0) {
-    textFont(f);
-    fill(0);
-    text("Welcome to Pacman!",width/2-120,height/2-50);
-    if (second() - timenow >= 3) {
-      fill(255);
-      rect(-1,-1,1021,931);
-      textFont(f);
-      fill(0);
-      text("The Game Will Begin In!",width/2-120,height/2-50);
-      if (second() - timenow >= 4) {
-        text("3..",width/2-5,height/2);
-        if (second() - timenow >= 5) {
-          fill(255);
-          rect(-1,-1,1021,931);
-          textFont(f);
-          fill(0);
-          text("The Game Will Begin In!",width/2-120,height/2-50);
-          text("2..",width/2-5,height/2);
-          if (second() - timenow >= 6) {
-            fill(255);
-            rect(-1,-1,1021,931);
-            textFont(f);
-            fill(0);
-            text("The Game Will Begin In!",width/2-120,height/2-50);
-            text("1..",width/2-5,height/2);
-          }
-          if (second() - timenow >= 7) {
-            currentlevel = 1;
-            fill(255);
-            rect(-1,-1,1021,931);
-          }
-        }
-      }
-    }
-  }
+  //if (currentlevel == 0) {
+  //  textFont(f);
+  //  fill(0);
+  //  text("Welcome to Pacman!",width/2-120,height/2-50);
+  //  if (second() - timenow >= 3) {
+  //    fill(255);
+  //    rect(-1,-1,1021,931);
+  //    textFont(f);
+  //    fill(0);
+  //    text("The Game Will Begin In!",width/2-120,height/2-50);
+  //    if (second() - timenow >= 4) {
+  //      text("3..",width/2-5,height/2);
+  //      if (second() - timenow >= 5) {
+  //        fill(255);
+  //        rect(-1,-1,1021,931);
+  //        textFont(f);
+  //        fill(0);
+  //        text("The Game Will Begin In!",width/2-120,height/2-50);
+  //        text("2..",width/2-5,height/2);
+  //        if (second() - timenow >= 6) {
+  //          fill(255);
+  //          rect(-1,-1,1021,931);
+  //          textFont(f);
+  //          fill(0);
+  //          text("The Game Will Begin In!",width/2-120,height/2-50);
+  //          text("1..",width/2-5,height/2);
+  //        }
+  //        if (second() - timenow >= 7) {
+  //          currentlevel = 1;
+  //          fill(255);
+  //          rect(-1,-1,1021,931);
+  //        }
+  //      }
+  //    }
+  //  }
+  //}
   if (currentlevel == 1) {
     levelmap = generatemap("./level1.txt");
     currentlevel = 1.1;
     collected = 0;
     collecting = 0;
-    lives = 0;
+    lives = 3;
     remaining = -1;
     enemymove = millis();
     playermove = millis();
@@ -121,9 +121,62 @@ void draw() {
     fill(255);
     rect(-1,-1,1021,931);
     enemylist.clear();
-    victory((int) currentlevel);
-    if (millis() - timenow >= 5000) {
-      currentlevel++;
+    //victory((int) currentlevel);
+    //if (timenow > millis()) {
+    //  timenow = millis();
+    //}
+    //else if (millis() - timenow >= 3000) {
+      //currentlevel = 2.1;
+    //}
+    currentlevel = 2.1;
+    levelmap = generatemap("./level2.txt");
+    enemymove = millis();
+    playermove = millis();
+    remaining = -1;
+  }
+  if (currentlevel == 2.1) {
+    if (remaining == 0) {
+      //println(collected);
+      collected += player.getcollected();
+      currentlevel = 3;
+      timenow = millis();
+      lives++;
+    }
+    else {
+      enemylist.clear();
+      levels(levelmap);
+      displayothers();
+      if (playermove > millis()) {
+        playermove = millis();
+      }
+      else {
+        if (millis() - playermove >= 75) {
+          player.move();
+          collecting = player.getcollected();
+          collected += collecting;
+          levelmap = player.getmap();
+          playermove = millis();
+        }
+      }
+      if (enemymove > millis()) {
+        enemymove = millis();
+      }
+      else {
+        if (millis() - enemymove >= 225) {
+          for (Enemy e: enemylist) {
+            e.move(levelmap);
+            levelmap = e.getmap();
+            if (e.getkills()) {
+              lives--;
+              e.resetkill();
+            }
+          }
+          enemymove = millis();
+        }
+      }
+      if (lives <= 0) {
+        currentlevel = -1;
+      }
     }
   }
   if (currentlevel == -1) {
@@ -142,9 +195,16 @@ private void displayothers() {
   rect(1010,10,10,920);
   stroke(0,0,0);
   fill(255,255,255);
-  text("LEVEL 1", 865, 30);
-  text("Invasion", 865, 60);
-  fill(#E8B817);
+  if (currentlevel == 1.1) {
+    text("LEVEL 1", 865, 30);
+    text("Invasion", 865, 60);
+    fill(#E8B817);
+  }
+  else if (currentlevel == 2.1){
+    text("LEVEL 2", 865, 30);
+    text("Invading", 865, 60);
+    fill(#E8B817);
+  }
   text("Remaining Coins: ", 820,120);
   text("" + remaining,890,150);
   ellipse(870,140,25,25);
