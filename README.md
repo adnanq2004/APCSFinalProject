@@ -45,4 +45,8 @@ June 3, 2021
 [Adnan] Adjusted player and enemy speed and edited some text on the death screen. Also updated the UML Diagram.
 
 June 4, 2021
-[Adnan AND Eric] Worked together to design 2nd level for pacman, and also draw ideas for new enemy type. 
+[Adnan AND Eric] Worked together to design 2nd level for pacman, and also draw ideas for new map traps. 
+[Adnan] Imported the map to make sure it worked properly
+
+June 5, 2021
+[Eric] Worked on designing the boss, however certain things started to break the entire game. I will have to think of a different approach to make "uninhabitable" ground. 
