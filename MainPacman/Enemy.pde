@@ -11,13 +11,14 @@ public class Enemy{
   boolean gotkill;
   String direction;
   
-  Enemy(char[][] map, int xcor, int ycor) {
+  Enemy(char[][] map, int xcor, int ycor, String direct) {
     level = map;
     speed = 1;
     x = xcor;
     y = ycor;
     time = second();
     gotkill = false;
+    direction = direct;
   }
   
   void move(char[][] ma) {
@@ -25,25 +26,25 @@ public class Enemy{
     String finalpath;
     int possiblepaths = 0;
     ArrayList<String> paths = new ArrayList<String>();
-    if ((x > 0 && (level[x-1][y] != '#' && level[x-1][y] != 'S')) || (level[x-1][y] == 'P' || level[x-1][y] == '.')) {
+    if ((x > 0 && (level[x-1][y] != '#' && level[x-1][y] != 'S')) || (level[x-1][y] == 'P' || level[x-1][y] == '.' || level[x-1][y] == 'C' || level[x-1][y] == 'R')) {
       possiblepaths++;
       paths.add("up");
     }
-    if ((y > 0 && (level[x][y-1] != '#' && level[x][y-1] != 'S')) || (level[x][y-1] == 'P' || level[x][y-1] == '.')) {
+    if ((y > 0 && (level[x][y-1] != '#' && level[x][y-1] != 'S')) || (level[x][y-1] == 'P' || level[x][y-1] == '.' || level[x][y-1] == 'C' || level[x][y-1] == 'R')) {
       possiblepaths++;
       paths.add("left");
     }
-    if ((x < level.length-1 && (level[x+1][y] != '#' && level[x+1][y] != 'S')) || (level[x+1][y] == 'P' || level[x+1][y] == '.')) {
+    if ((x < level.length-1 && (level[x+1][y] != '#' && level[x+1][y] != 'S')) || (level[x+1][y] == 'P' || level[x+1][y] == '.' || level[x+1][y] == 'C' || level[x+1][y] == 'R')) {
       possiblepaths++;
       paths.add("down");
     }
-    if ((y < level[0].length-1 && (level[x][y+1] != '#' && level[x][y+1] != 'S')) || (level[x][y+1] == 'P' || level[x][y+1] == '.')) {
+    if ((y < level[0].length-1 && (level[x][y+1] != '#' && level[x][y+1] != 'S')) || (level[x][y+1] == 'P' || level[x][y+1] == '.' || level[x][y+1] == 'C' || level[x][y+1] == 'R')) {
       possiblepaths++;
       paths.add("right");
     }
     
     if (paths.size() == 2) {
-      String opposite = "";
+      String opposite = "reeeeeeeee";
       if (direction == "up") {
         opposite = "down";
       }
@@ -94,7 +95,6 @@ public class Enemy{
         finalpath = paths.get(int_random);
       }
     }
-    
     else {
       finalpath = paths.get(0);
     }
@@ -155,6 +155,10 @@ public class Enemy{
   
   char[][] getmap() {
     return level;
+  }
+  
+  String getDirection() {
+    return direction;
   }
   
   void resetkill() {

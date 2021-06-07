@@ -15,6 +15,7 @@ int enemymove;
 int playermove;
 boolean currentreversed;
 ArrayList<Enemy> enemylist = new ArrayList<Enemy>();
+ArrayList<String> directionlist = new ArrayList<String>();
 
 void setup() {
   size(1020,930);
@@ -73,6 +74,9 @@ void draw() {
     remaining = -1;
     enemymove = millis();
     playermove = millis();
+    for (int i = 0; i < 10; i++) {
+      directionlist.add("none");
+    }
   }
   if (currentlevel == 1.1) {
     if (remaining == 0) {
@@ -103,8 +107,18 @@ void draw() {
       }
       else {
         if (millis() - enemymove >= 225) {
-          for (Enemy e: enemylist) {
+          //for (Enemy e: enemylist) {
+          //  e.move(levelmap);
+          //  levelmap = e.getmap();
+          //  if (e.getkills()) {
+          //    lives--;
+          //    e.resetkill();
+          //  }
+          //}
+          for (int i = 0; i < enemylist.size(); i++) {
+            Enemy e = enemylist.get(i);
             e.move(levelmap);
+            directionlist.set(i,e.getDirection());
             levelmap = e.getmap();
             if (e.getkills()) {
               lives--;
@@ -167,8 +181,18 @@ void draw() {
       }
       else {
         if (millis() - enemymove >= 225) {
-          for (Enemy e: enemylist) {
+          //for (Enemy e: enemylist) {
+          //  e.move(levelmap);
+          //  levelmap = e.getmap();
+          //  if (e.getkills()) {
+          //    lives--;
+          //    e.resetkill();
+          //  }
+          //directionlist.clear();
+          for (int i = 0; i < enemylist.size(); i++) {
+            Enemy e = enemylist.get(i);
             e.move(levelmap);
+            directionlist.set(i,e.getDirection());
             levelmap = e.getmap();
             if (e.getkills()) {
               lives--;
@@ -264,7 +288,7 @@ private char[][] generatemap(String filename) {
 }
 
 private void levels(char[][] level) {
-    
+    int directionindex = 0;
     //starting the code to make the maps visualized
     fill(255);
     rect(-1,-1,1001,931);
@@ -364,8 +388,10 @@ private void levels(char[][] level) {
           ellipse(currentx + 10,currenty + 15,5,5);
           ellipse(currentx + 20,currenty + 15,5,5);
           stroke(0,0,0);
-          Enemy newstuff = new Enemy(levelmap, i, j);
+          Enemy newstuff;
+          newstuff = new Enemy(levelmap, i, j, directionlist.get(directionindex));
           enemylist.add(newstuff);
+          directionindex++;
         }
         else if (level[i][j] == 'E') {
           fill(0);
@@ -391,8 +417,15 @@ private void levels(char[][] level) {
           ellipse(currentx + 10,currenty + 15,5,5);
           ellipse(currentx + 20,currenty + 15,5,5);
           stroke(0,0,0);
-          Enemy newstuff = new Enemy(levelmap, i, j);
+          Enemy newstuff;
+          if (directionlist.size() > directionindex) {
+            newstuff = new Enemy(levelmap, i, j, directionlist.get(directionindex));
+          }
+          else {
+            newstuff = new Enemy(levelmap, i, j, "none");
+          }
           enemylist.add(newstuff);
+          directionindex++;
         }
         else {
           fill(0);
