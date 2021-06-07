@@ -13,6 +13,7 @@ Player player;
 int lives;
 int enemymove;
 int playermove;
+boolean currentreversed;
 ArrayList<Enemy> enemylist = new ArrayList<Enemy>();
 
 void setup() {
@@ -21,7 +22,7 @@ void setup() {
   rect(-1,-1,1021,931);
   f = createFont("Arial",24,true);
   timenow = second();
-  currentlevel = 0;
+  currentlevel = 1;
   textFont(f);
 }
 
@@ -63,6 +64,7 @@ void draw() {
     }
   }
   if (currentlevel == 1) {
+    currentreversed = false;
     levelmap = generatemap("./level1.txt");
     currentlevel = 1.1;
     collected = 0;
@@ -129,6 +131,7 @@ void draw() {
       //currentlevel = 2.1;
     //}
     currentlevel = 2.1;
+    remaining = -1;
     levelmap = generatemap("./level2.txt");
     enemymove = millis();
     playermove = millis();
@@ -152,6 +155,7 @@ void draw() {
       else {
         if (millis() - playermove >= 75) {
           player.move();
+          currentreversed = player.movements();
           collecting = player.getcollected();
           collected += collecting;
           levelmap = player.getmap();
@@ -282,6 +286,13 @@ private void levels(char[][] level) {
           fill(#E8B817);
           ellipse(currentx + 15, currenty + 15, 10,10);
         }
+        else if (level[i][j] == 'B') {
+          val++;
+          fill(0);
+          rect(currentx,currenty,30,30);
+          fill(#FC1FE3);
+          ellipse(currentx + 15, currenty + 15, 10,10);
+        }
         else if (level[i][j] == 'S') {
           fill(0);
           rect(currentx,currenty,30,30);
@@ -292,7 +303,7 @@ private void levels(char[][] level) {
           rect(currentx,currenty,30,30);
           //player is gonna go here.
           fill(#F50F0F);
-          player = new Player(i,j,level);
+          player = new Player(i,j,level,currentreversed);
           stroke(#F50F0F);
           ellipse(currentx + 15,currenty + 15,15,15);
           beginShape();
@@ -313,7 +324,7 @@ private void levels(char[][] level) {
           rect(currentx,currenty,30,30);
           //player is gonna go here.
           fill(#F50F0F);
-          player = new Player(i,j,level);
+          player = new Player(i,j,level,currentreversed);
           stroke(#F50F0F);
           ellipse(currentx + 15,currenty + 15,15,15);
           beginShape();
