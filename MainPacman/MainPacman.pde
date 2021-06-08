@@ -23,7 +23,7 @@ void setup() {
   rect(-1,-1,1021,931);
   f = createFont("Arial",24,true);
   timenow = second();
-  currentlevel = 2;
+  currentlevel = 1;
   lives = 3;
   textFont(f);
   for (int i = 0; i < 10; i++) {

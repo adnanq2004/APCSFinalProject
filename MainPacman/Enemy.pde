@@ -24,23 +24,53 @@ public class Enemy{
   void move(char[][] ma) {
     level = ma;
     String finalpath;
+    int adjenemies = 0;
     int possiblepaths = 0;
     ArrayList<String> paths = new ArrayList<String>();
-    if ((x > 0 && (level[x-1][y] != '#' && level[x-1][y] != 'S')) || (level[x-1][y] == 'P' || level[x-1][y] == '.' || level[x-1][y] == 'C' || level[x-1][y] == 'B')) {
+    if ((x > 0 && (level[x-1][y] != '#' && level[x-1][y] != 'S')) && (level[x-1][y] == 'P' || level[x-1][y] == '.' || level[x-1][y] == 'C' || level[x-1][y] == 'B')) {
       possiblepaths++;
       paths.add("up");
     }
-    if ((y > 0 && (level[x][y-1] != '#' && level[x][y-1] != 'S')) || (level[x][y-1] == 'P' || level[x][y-1] == '.' || level[x][y-1] == 'C' || level[x][y-1] == 'B')) {
+    if (x > 0 && (level[x-1][y] == 'E' || level[x-1][y] == 'O' || level[x-1][y] == 'H')) {
+      adjenemies++;
+    }
+    
+    if ((y > 0 && (level[x][y-1] != '#' && level[x][y-1] != 'S')) && (level[x][y-1] == 'P' || level[x][y-1] == '.' || level[x][y-1] == 'C' || level[x][y-1] == 'B')) {
       possiblepaths++;
       paths.add("left");
     }
-    if ((x < level.length-1 && (level[x+1][y] != '#' && level[x+1][y] != 'S')) || (level[x+1][y] == 'P' || level[x+1][y] == '.' || level[x+1][y] == 'C' || level[x+1][y] == 'B')) {
+    if (y > 0 && (level[x][y-1] == 'E' || level[x][y-1] == 'O' || level[x][y-1] == 'H')) {
+      adjenemies++;
+    }
+    
+    if ((x < level.length-1 && (level[x+1][y] != '#' && level[x+1][y] != 'S')) && (level[x+1][y] == 'P' || level[x+1][y] == '.' || level[x+1][y] == 'C' || level[x+1][y] == 'B')) {
       possiblepaths++;
       paths.add("down");
     }
-    if ((y < level[0].length-1 && (level[x][y+1] != '#' && level[x][y+1] != 'S')) || (level[x][y+1] == 'P' || level[x][y+1] == '.' || level[x][y+1] == 'C' || level[x][y+1] == 'B')) {
+    if (x < level.length-1 && (level[x+1][y] == 'E' || level[x+1][y] == 'O' || level[x+1][y] == 'H')) {
+      adjenemies++;
+    }
+    
+    if ((y < level[0].length-1 && (level[x][y+1] != '#' && level[x][y+1] != 'S')) && (level[x][y+1] == 'P' || level[x][y+1] == '.' || level[x][y+1] == 'C' || level[x][y+1] == 'B')) {
       possiblepaths++;
       paths.add("right");
+    }
+    if (y < level[0].length-1 && (level[x][y+1] == 'E' || level[x][y+1] == 'O' || level[x][y+1] == 'H')) {
+      adjenemies++;
+    }
+    if (adjenemies >= 1) {
+      if (level[1][1] == 'P' || level[1][1] == '.' || level[1][1] == 'C' || level[1][1] == 'B') {
+        step(level, 1, 1);
+      }
+      else if (level[level.length-1][1] == 'P' || level[level.length-1][1] == '.' || level[level.length-1][1] == 'C' || level[level.length-1][1] == 'B') {
+        step(level, level.length-1, 1);
+      }
+      else if (level[1][level[0].length-1] == 'P' || level[1][level[0].length-1] == '.' || level[1][level[0].length-1] == 'C' || level[1][level[0].length-1] == 'B') {
+        step(level, 1, level[0].length-1);
+      }
+      else {
+        step(level, level.length-1, level[0].length-1);
+      }
     }
     
     if (paths.size() == 2) {
