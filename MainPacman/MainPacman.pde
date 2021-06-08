@@ -227,21 +227,28 @@ private void displayothers() {
   rect(1010,10,10,920);
   stroke(0,0,0);
   fill(255,255,255);
+  
+  //display level1
   if (currentlevel == 1.1) {
     text("LEVEL 1", 865, 30);
     text("Invasion", 865, 60);
-    fill(#E8B817);
   }
+  
+  //display level2
   else if (currentlevel == 2.1){
     text("LEVEL 2", 865, 30);
     text("Invading", 865, 60);
-    fill(#E8B817);
   }
+  
+  //display remaining coins
+  fill(#E8B817);
   text("Remaining Coins: ", 820,120);
   text("" + remaining,890,150);
   ellipse(870,140,25,25);
   ellipse(870,140,15,15);
   line(870,135,870,145);
+  
+  //display lives
   fill(#FC001E);
   text("Lives: " + lives, 865, 210);
   stroke(#FC001E);
@@ -253,15 +260,26 @@ private void displayothers() {
   vertex(984,195);
   endShape();
   stroke(0,0,0);
+  
+  //display remaining coins
   fill(#E8B817);
   text("Collected Coins: ", 830,270);
-  int collect = collected;
-  text("" + collect,890,300);
+  text("" + collected,890,300);
   fill(#E8B817);
   ellipse(870,290,25,25);
   ellipse(870,290,15,15);
   line(870,285,870,295);
   fill(0,0,0);
+  
+  //display controls to use
+  fill(#530FF5);
+  if (!currentreversed) {
+    text("Controls: WASD", 828,360);
+  }
+  else {
+    text("Controls:", 860,360);
+    text("Arrow Keys", 850,390);
+  }
 }
 
 private char[][] generatemap(String filename) {
