@@ -26,19 +26,19 @@ public class Enemy{
     String finalpath;
     int possiblepaths = 0;
     ArrayList<String> paths = new ArrayList<String>();
-    if ((x > 0 && (level[x-1][y] != '#' && level[x-1][y] != 'S')) || (level[x-1][y] == 'P' || level[x-1][y] == '.' || level[x-1][y] == 'C' || level[x-1][y] == 'R')) {
+    if ((x > 0 && (level[x-1][y] != '#' && level[x-1][y] != 'S')) || (level[x-1][y] == 'P' || level[x-1][y] == '.' || level[x-1][y] == 'C' || level[x-1][y] == 'B')) {
       possiblepaths++;
       paths.add("up");
     }
-    if ((y > 0 && (level[x][y-1] != '#' && level[x][y-1] != 'S')) || (level[x][y-1] == 'P' || level[x][y-1] == '.' || level[x][y-1] == 'C' || level[x][y-1] == 'R')) {
+    if ((y > 0 && (level[x][y-1] != '#' && level[x][y-1] != 'S')) || (level[x][y-1] == 'P' || level[x][y-1] == '.' || level[x][y-1] == 'C' || level[x][y-1] == 'B')) {
       possiblepaths++;
       paths.add("left");
     }
-    if ((x < level.length-1 && (level[x+1][y] != '#' && level[x+1][y] != 'S')) || (level[x+1][y] == 'P' || level[x+1][y] == '.' || level[x+1][y] == 'C' || level[x+1][y] == 'R')) {
+    if ((x < level.length-1 && (level[x+1][y] != '#' && level[x+1][y] != 'S')) || (level[x+1][y] == 'P' || level[x+1][y] == '.' || level[x+1][y] == 'C' || level[x+1][y] == 'B')) {
       possiblepaths++;
       paths.add("down");
     }
-    if ((y < level[0].length-1 && (level[x][y+1] != '#' && level[x][y+1] != 'S')) || (level[x][y+1] == 'P' || level[x][y+1] == '.' || level[x][y+1] == 'C' || level[x][y+1] == 'R')) {
+    if ((y < level[0].length-1 && (level[x][y+1] != '#' && level[x][y+1] != 'S')) || (level[x][y+1] == 'P' || level[x][y+1] == '.' || level[x][y+1] == 'C' || level[x][y+1] == 'B')) {
       possiblepaths++;
       paths.add("right");
     }
@@ -126,8 +126,32 @@ public class Enemy{
         level[x][y] = 'C';
         level[xval][yval] = 'O';
       }
+      else if (level[xval][yval] == 'B') {
+        level[x][y] = 'C';
+        level[xval][yval] = 'H';
+      }
       else if (level[xval][yval] == '.') {
         level[x][y] = 'C';
+        level[xval][yval] = 'E';
+      }
+    }
+    else if (level[x][y] == 'H') {
+      if (level[xval][yval] == 'P') {
+        level[x][y] = 'B';
+        level[xval][yval] = 'E';
+        level[15][13] = 'P';
+        gotkill = true;
+      }
+      else if (level[xval][yval] == 'C') {
+        level[x][y] = 'B';
+        level[xval][yval] = 'O';
+      }
+      else if (level[xval][yval] == 'B') {
+        level[x][y] = 'B';
+        level[xval][yval] = 'H';
+      }
+      else if (level[xval][yval] == '.') {
+        level[x][y] = 'B';
         level[xval][yval] = 'E';
       }
     }
@@ -141,6 +165,10 @@ public class Enemy{
       else if (level[xval][yval] == 'C') {
         level[x][y] = '.';
         level[xval][yval] = 'O';
+      }
+      else if (level[xval][yval] == 'B') {
+        level[x][y] = '.';
+        level[xval][yval] = 'H';
       }
       else if (level[xval][yval] == '.') {
         level[x][y] = '.';
