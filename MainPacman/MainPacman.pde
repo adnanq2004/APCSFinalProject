@@ -67,7 +67,7 @@ void draw() {
     currentlevel = 1.1;
     collected = 0;
     collecting = 0;
-    lives = 0;
+    lives = 3;
     remaining = -1;
     enemymove = millis();
     playermove = millis();
