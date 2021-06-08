@@ -49,4 +49,8 @@ June 4, 2021
 [Adnan] Imported the map to make sure it worked properly
 
 June 5, 2021
-[Eric] Worked on designing the boss, however certain things started to break the entire game. I will have to think of a different approach to make "uninhabitable" ground. 
+[Eric] Worked on designing the boss, however certain things started to break the entire game will have to restart on this part. Started to implement trick coins. 
+
+June 7, 2021
+[Adnan] Worked on making the enemies smarter, it is still a working progress however, the enemies still freeze up. Also quickly finished implementing trick coins that Eric thought of a few days ago.
+[Eric] Started working on the boss again with Adnan, additionally created the third map, however I probably should have Adnan edit it for any massive issues. 
