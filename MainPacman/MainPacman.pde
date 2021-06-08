@@ -23,8 +23,12 @@ void setup() {
   rect(-1,-1,1021,931);
   f = createFont("Arial",24,true);
   timenow = second();
-  currentlevel = 1;
+  currentlevel = 2;
+  lives = 3;
   textFont(f);
+  for (int i = 0; i < 10; i++) {
+    directionlist.add("none");
+  }
 }
 
 void draw() {
@@ -74,9 +78,6 @@ void draw() {
     remaining = -1;
     enemymove = millis();
     playermove = millis();
-    for (int i = 0; i < 10; i++) {
-      directionlist.add("none");
-    }
   }
   if (currentlevel == 1.1) {
     if (remaining == 0) {
@@ -364,6 +365,36 @@ private void levels(char[][] level) {
           stroke(0,0,0);
         }
         else if (level[i][j] == 'O') {
+          val++;
+          fill(0);
+          stroke(0,0,0);
+          rect(currentx,currenty,30,30);
+          fill(#FC1FE3);
+          stroke(#FC1FE3);
+          ellipse(currentx + 15,currenty + 15, 15,15);
+          beginShape();
+          vertex(currentx + 8, currenty + 18);
+          vertex(currentx + 8,currenty + 28);
+          vertex(currentx + 15,currenty + 18);
+          vertex(currentx + 15,currenty + 18);
+          vertex(currentx + 22,currenty + 28);
+          vertex(currentx + 22,currenty + 18);
+          endShape();
+          beginShape();
+          vertex(currentx + 10,currenty + 18);
+          vertex(currentx + 15,currenty + 28);
+          vertex(currentx + 20,currenty + 18);
+          endShape();
+          fill(0,0,0);
+          ellipse(currentx + 10,currenty + 15,5,5);
+          ellipse(currentx + 20,currenty + 15,5,5);
+          stroke(0,0,0);
+          Enemy newstuff;
+          newstuff = new Enemy(levelmap, i, j, directionlist.get(directionindex));
+          enemylist.add(newstuff);
+          directionindex++;
+        }
+        else if (level[i][j] == 'H') {
           val++;
           fill(0);
           stroke(0,0,0);
