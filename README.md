@@ -52,5 +52,5 @@ June 5, 2021
 [Eric] Worked on designing the boss, however certain things started to break the entire game will have to restart on this part. Started to implement trick coins. 
 
 June 7, 2021
-[Adnan] Worked on making the enemies smarter, it is still a working progress however, the enemies still freeze up. Also quickly finished implementing trick coins that Eric thought of a few days ago.
-[Eric] Started working on the boss again with Adnan, additionally created the third map, however I probably should have Adnan edit it for any massive issues. 
+[Adnan] Worked on making the enemies smarter and not freeze up and also quickly finished implementing trick coins that Eric thought of a few days ago.
+[Eric] Started working on the boss again and additionally created the third map, however I probably should have Adnan edit it for any massive issues. The third map is based on a combination of real life mazes while also trying to make sure that the paths are always tight
