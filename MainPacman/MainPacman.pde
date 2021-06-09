@@ -32,6 +32,8 @@ void setup() {
 }
 
 void draw() {
+  
+  //opening
   if (currentlevel == 0) {
     textFont(f);
     fill(0);
@@ -68,6 +70,8 @@ void draw() {
       }
     }
   }
+  
+  //level 1
   if (currentlevel == 1) {
     currentreversed = false;
     levelmap = generatemap("./level1.txt");
@@ -81,7 +85,6 @@ void draw() {
   }
   if (currentlevel == 1.1) {
     if (remaining == 0) {
-      //println(collected);
       collected += player.getcollected();
       currentlevel = 2;
       timenow = millis();
@@ -108,14 +111,6 @@ void draw() {
       }
       else {
         if (millis() - enemymove >= 225) {
-          //for (Enemy e: enemylist) {
-          //  e.move(levelmap);
-          //  levelmap = e.getmap();
-          //  if (e.getkills()) {
-          //    lives--;
-          //    e.resetkill();
-          //  }
-          //}
           for (int i = 0; i < enemylist.size(); i++) {
             Enemy e = enemylist.get(i);
             e.move(levelmap);
@@ -134,17 +129,12 @@ void draw() {
       }
     }
   }
+  
+  //level 2
   if (currentlevel == 2) {
     fill(255);
     rect(-1,-1,1021,931);
     enemylist.clear();
-    //victory((int) currentlevel);
-    //if (timenow > millis()) {
-    //  timenow = millis();
-    //}
-    //else if (millis() - timenow >= 3000) {
-      //currentlevel = 2.1;
-    //}
     currentlevel = 2.1;
     remaining = -1;
     levelmap = generatemap("./level2.txt");
@@ -154,7 +144,6 @@ void draw() {
   }
   if (currentlevel == 2.1) {
     if (remaining == 0) {
-      //println(collected);
       collected += player.getcollected();
       currentlevel = 3;
       timenow = millis();
@@ -182,14 +171,6 @@ void draw() {
       }
       else {
         if (millis() - enemymove >= 225) {
-          //for (Enemy e: enemylist) {
-          //  e.move(levelmap);
-          //  levelmap = e.getmap();
-          //  if (e.getkills()) {
-          //    lives--;
-          //    e.resetkill();
-          //  }
-          //directionlist.clear();
           for (int i = 0; i < enemylist.size(); i++) {
             Enemy e = enemylist.get(i);
             e.move(levelmap);
@@ -208,7 +189,67 @@ void draw() {
       }
     }
   }
+  
+  //level 3
   if (currentlevel == 3) {
+    fill(255);
+    rect(-1,-1,1021,931);
+    enemylist.clear();
+    currentlevel = 3.1;
+    remaining = -1;
+    levelmap = generatemap("./level2.txt");
+    enemymove = millis();
+    playermove = millis();
+    remaining = -1;
+  }
+  if (currentlevel == 3.1) {
+    if (remaining == 0) {
+      collected += player.getcollected();
+      currentlevel = 2;
+      timenow = millis();
+      lives++;
+    }
+    else {
+      enemylist.clear();
+      levels(levelmap);
+      displayothers();
+      if (playermove > millis()) {
+        playermove = millis();
+      }
+      else {
+        if (millis() - playermove >= 75) {
+          player.move();
+          currentreversed = player.movements();
+          collecting = player.getcollected();
+          collected += collecting;
+          levelmap = player.getmap();
+          playermove = millis();
+        }
+      }
+      if (enemymove > millis()) {
+        enemymove = millis();
+      }
+      else {
+        if (millis() - enemymove >= 225) {
+          for (int i = 0; i < enemylist.size(); i++) {
+            Enemy e = enemylist.get(i);
+            e.move(levelmap);
+            directionlist.set(i,e.getDirection());
+            levelmap = e.getmap();
+            if (e.getkills()) {
+              lives--;
+              e.resetkill();
+            }
+          }
+          enemymove = millis();
+        }
+      }
+      if (lives <= 0) {
+        currentlevel = -1;
+      }
+    }
+  }
+  if (currentlevel == 4) {
     victory(2);
   }
   if (currentlevel == -1) {
@@ -238,6 +279,11 @@ private void displayothers() {
   else if (currentlevel == 2.1){
     text("LEVEL 2", 865, 30);
     text("Invading", 865, 60);
+  }
+  
+  else if (currentlevel == 3.1) {
+    text("LEVEL 2", 865, 30);
+    text("Invaded", 865, 60);
   }
   
   //display remaining coins
@@ -325,11 +371,12 @@ private void levels(char[][] level) {
           val++;
           fill(0);
           rect(currentx,currenty,30,30);
-          //new coin here, so probably make a class or smth for that later.
+          //new coin
           fill(#E8B817);
           ellipse(currentx + 15, currenty + 15, 10,10);
         }
         else if (level[i][j] == 'B') {
+          //reversing coin
           val++;
           fill(0);
           rect(currentx,currenty,30,30);
@@ -339,12 +386,13 @@ private void levels(char[][] level) {
         else if (level[i][j] == 'S') {
           fill(0);
           rect(currentx,currenty,30,30);
+          //safe zone
         }
         else if (level[i][j] == 'R') {
+          //player is gonna go here.
           fill(0);
           stroke(0,0,0);
           rect(currentx,currenty,30,30);
-          //player is gonna go here.
           fill(#F50F0F);
           player = new Player(i,j,level,currentreversed);
           stroke(#F50F0F);
@@ -362,10 +410,10 @@ private void levels(char[][] level) {
           stroke(0,0,0);
         }
         else if (level[i][j] == 'P') {
+          //player is gonna go here.
           fill(0);
           stroke(0,0,0);
           rect(currentx,currenty,30,30);
-          //player is gonna go here.
           fill(#F50F0F);
           player = new Player(i,j,level,currentreversed);
           stroke(#F50F0F);
@@ -383,6 +431,7 @@ private void levels(char[][] level) {
           stroke(0,0,0);
         }
         else if (level[i][j] == 'O') {
+          //enemy on coin is here
           val++;
           fill(0);
           stroke(0,0,0);
@@ -413,6 +462,7 @@ private void levels(char[][] level) {
           directionindex++;
         }
         else if (level[i][j] == 'H') {
+          //enemy on a flipping coin is here
           val++;
           fill(0);
           stroke(0,0,0);
@@ -443,6 +493,7 @@ private void levels(char[][] level) {
           directionindex++;
         }
         else if (level[i][j] == 'E') {
+          //enemy is here
           fill(0);
           rect(currentx,currenty,30,30);
           stroke(0,0,0);
@@ -475,6 +526,14 @@ private void levels(char[][] level) {
           }
           enemylist.add(newstuff);
           directionindex++;
+        }
+        else if (level[i][j] == 'Q') {
+          //boss on a coin is here
+          
+        }
+        else if (level[i][j] == 'T') {
+          //boss is here
+          
         }
         else {
           fill(0);

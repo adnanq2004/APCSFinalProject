@@ -31,48 +31,21 @@ public class Enemy{
       possiblepaths++;
       paths.add("up");
     }
-    //if (x > 0 && (level[x-1][y] == 'E' || level[x-1][y] == 'O' || level[x-1][y] == 'H')) {
-    //  adjenemies++;
-    //}
     
     if (y > 0 && (level[x][y-1] == 'P' || level[x][y-1] == '.' || level[x][y-1] == 'C' || level[x][y-1] == 'B')) {
       possiblepaths++;
       paths.add("left");
     }
-    //if (y > 0 && (level[x][y-1] == 'E' || level[x][y-1] == 'O' || level[x][y-1] == 'H')) {
-    //  adjenemies++;
-    //}
     
     if (x < level.length-1 && (level[x+1][y] == 'P' || level[x+1][y] == '.' || level[x+1][y] == 'C' || level[x+1][y] == 'B')) {
       possiblepaths++;
       paths.add("down");
     }
-    //if (x < level.length-1 && (level[x+1][y] == 'E' || level[x+1][y] == 'O' || level[x+1][y] == 'H')) {
-    //  adjenemies++;
-    //}
     
     if (y < level[0].length-1 && (level[x][y+1] == 'P' || level[x][y+1] == '.' || level[x][y+1] == 'C' || level[x][y+1] == 'B')) {
       possiblepaths++;
       paths.add("right");
     }
-    //if (y < level[0].length-1 && (level[x][y+1] == 'E' || level[x][y+1] == 'O' || level[x][y+1] == 'H')) {
-    //  adjenemies++;
-    //}
-    
-    //if (adjenemies >= 2) {
-    //  if (level[1][1] == 'P' || level[1][1] == '.' || level[1][1] == 'C' || level[1][1] == 'B') {
-    //    step(level, 1, 1);
-    //  }
-    //  else if (level[level.length-1][1] == 'P' || level[level.length-1][1] == '.' || level[level.length-1][1] == 'C' || level[level.length-1][1] == 'B') {
-    //    step(level, level.length-1, 1);
-    //  }
-    //  else if (level[1][level[0].length-1] == 'P' || level[1][level[0].length-1] == '.' || level[1][level[0].length-1] == 'C' || level[1][level[0].length-1] == 'B') {
-    //    step(level, 1, level[0].length-1);
-    //  }
-    //  else if (level[level.length-1][level[0].length-1] == 'P' || level[level.length-1][level[0].length-1] == '.' || level[level.length-1][level[0].length-1] == 'C' || level[level.length-1][level[0].length-1] == 'B') {
-    //    step(level, level.length-1, level[0].length-1);
-    //  }
-    //}
     
     if (paths.size() == 0) {
     }
@@ -132,7 +105,13 @@ public class Enemy{
   }
   
   void step(char[][] level, int xval, int yval) {
-    if (level[x][y] == 'O') {
+    if (level[x][y] == 'Q') {
+      
+    }
+    else if (level[x][y] == 'T') {
+      
+    }
+    else if (level[x][y] == 'O') {
       if (level[xval][yval] == 'P') {
         level[x][y] = 'C';
         level[xval][yval] = 'E';
