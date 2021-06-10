@@ -3,8 +3,6 @@ import java.io.*;
 public class Enemy{
   int speed;
   char[][] level;
-  //Deque<Integer> pos;
-  //Deque<String> directions;
   int x;
   int y;
   int time;
@@ -88,7 +86,7 @@ public class Enemy{
     
   }
   
-  void intermediary(String fal){
+  private void intermediary(String fal){
     if (fal == "up") {
       step(level,x-1,y);
     }
@@ -104,14 +102,8 @@ public class Enemy{
     direction = fal;
   }
   
-  void step(char[][] level, int xval, int yval) {
-    if (level[x][y] == 'Q') {
-      
-    }
-    else if (level[x][y] == 'T') {
-      
-    }
-    else if (level[x][y] == 'O') {
+  private void step(char[][] level, int xval, int yval) {
+    if (level[x][y] == 'O') {
       if (level[xval][yval] == 'P') {
         level[x][y] = 'C';
         level[xval][yval] = 'E';
@@ -187,6 +179,10 @@ public class Enemy{
   
   void resetkill() {
     gotkill = false;
+  }
+  
+  char getChar() {
+    return (level[x][y]);
   }
   
 }

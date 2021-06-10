@@ -547,6 +547,47 @@ private void levels(char[][] level) {
     
 }
 
+private void Frozen() {
+  for(int i = 0; i < levelmap.length; i++) {
+    for(int j = 0; j < levelmap[0].length; j++) {
+      if(levelmap[i][j] == 'Q') { // Frozen Tricknote
+        levelmap[i][j] = 'B';
+      }
+      else if(levelmap[i][j] == 'R') {// Frozen Coin
+        levelmap[i][j] = 'C';
+      }
+      else if(levelmap[i][j] == 'T') {// Frozen Nothing
+        levelmap[i][j] = '.';
+      }
+    }
+  }
+  for(int i = 0; i < levelmap.length; i++) {
+    for(int j = 0; j < levelmap[0].length; j++) {
+      if(levelmap[i][j] == 'B') {
+        Random rand = new Random();
+        int int_random = rand.nextInt(10);
+        if(int_random == 5) {
+          levelmap[i][j] = 'Q';
+        }
+      }
+      else if(levelmap[i][j] == 'C') {
+        Random rand = new Random();
+        int int_random = rand.nextInt(10);
+        if(int_random == 5) {
+          levelmap[i][j] = 'R';
+        }
+      }
+      else if(levelmap[i][j] == '.') {
+        Random rand = new Random();
+        int int_random = rand.nextInt(10);
+        if(int_random == 5) {
+          levelmap[i][j] = 'T';
+        }
+      }
+    }
+  }
+}
+
 private void gameover() {
   fill(255);
   rect(-1,-1,1021,931);
