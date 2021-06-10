@@ -54,3 +54,7 @@ June 5, 2021
 June 7, 2021
 [Adnan] Worked on making the enemies smarter and not freeze up and also quickly finished implementing trick coins that Eric thought of a few days ago.
 [Eric] Started working on the boss again and additionally created the third map, however I probably should have Adnan edit it for any massive issues. The third map is based on a combination of real life mazes while also trying to make sure that the paths are always tight
+
+June 9, 2021
+[Adnan] Made new UML Diagram
+[Eric] Created Frozen method in MainPacman which is an level hazard. Once every few seconds(still undetermined) there will be tiles that nobody can walk on that spawns, they will last for x amount of time, then be replaced with new tiles that cannot be walked on by any entity.
