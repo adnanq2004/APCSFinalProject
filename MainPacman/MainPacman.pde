@@ -14,6 +14,7 @@ int lives;
 int enemymove;
 int playermove;
 boolean currentreversed;
+int frozentimes;
 ArrayList<Enemy> enemylist = new ArrayList<Enemy>();
 ArrayList<String> directionlist = new ArrayList<String>();
 
@@ -23,7 +24,7 @@ void setup() {
   rect(-1,-1,1021,931);
   f = createFont("Arial",24,true);
   timenow = second();
-  currentlevel = 1;
+  currentlevel = 3;
   lives = 3;
   textFont(f);
   for (int i = 0; i < 10; i++) {
@@ -75,11 +76,11 @@ void draw() {
   if (currentlevel == 1) {
     currentreversed = false;
     levelmap = generatemap("./level1.txt");
+    remaining = -1;
     currentlevel = 1.1;
     collected = 0;
     collecting = 0;
     lives = 3;
-    remaining = -1;
     enemymove = millis();
     playermove = millis();
   }
@@ -136,23 +137,24 @@ void draw() {
     rect(-1,-1,1021,931);
     enemylist.clear();
     currentlevel = 2.1;
+    levelmap = generatemap("./level3.txt");
     remaining = -1;
-    levelmap = generatemap("./level2.txt");
     enemymove = millis();
     playermove = millis();
-    remaining = -1;
   }
   if (currentlevel == 2.1) {
     if (remaining == 0) {
-      collected += player.getcollected();
+      //collected += player.getcollected();
       currentlevel = 3;
       timenow = millis();
       lives++;
     }
     else {
+      
       enemylist.clear();
       levels(levelmap);
       displayothers();
+      
       if (playermove > millis()) {
         playermove = millis();
       }
@@ -166,6 +168,7 @@ void draw() {
           playermove = millis();
         }
       }
+      
       if (enemymove > millis()) {
         enemymove = millis();
       }
@@ -184,9 +187,11 @@ void draw() {
           enemymove = millis();
         }
       }
+      
       if (lives <= 0) {
         currentlevel = -1;
       }
+      
     }
   }
   
@@ -196,23 +201,39 @@ void draw() {
     rect(-1,-1,1021,931);
     enemylist.clear();
     currentlevel = 3.1;
+    levelmap = generatemap("./level3.txt");
+    levels(levelmap);
     remaining = -1;
-    levelmap = generatemap("./level2.txt");
     enemymove = millis();
     playermove = millis();
-    remaining = -1;
+    Frozen();
+    frozentimes = millis();
   }
   if (currentlevel == 3.1) {
     if (remaining == 0) {
-      collected += player.getcollected();
-      currentlevel = 2;
+      //collected += player.getcollected();
+      currentlevel = 4;
       timenow = millis();
       lives++;
+      Frozen();
+      frozentimes = millis();
     }
     else {
+      
+      if (frozentimes > millis()) {
+        frozentimes = millis();
+      }
+      else {
+        if (millis() - frozentimes >= 10000) {
+          Frozen();
+          frozentimes = millis();
+        }
+      }
+      
       enemylist.clear();
       levels(levelmap);
       displayothers();
+      
       if (playermove > millis()) {
         playermove = millis();
       }
@@ -226,6 +247,7 @@ void draw() {
           playermove = millis();
         }
       }
+      
       if (enemymove > millis()) {
         enemymove = millis();
       }
@@ -244,6 +266,7 @@ void draw() {
           enemymove = millis();
         }
       }
+      
       if (lives <= 0) {
         currentlevel = -1;
       }
@@ -282,8 +305,8 @@ private void displayothers() {
   }
   
   else if (currentlevel == 3.1) {
-    text("LEVEL 2", 865, 30);
-    text("Invaded", 865, 60);
+    text("LEVEL 3", 865, 30);
+    text("Escaping", 865, 60);
   }
   
   //display remaining coins
@@ -347,6 +370,7 @@ private char[][] generatemap(String filename) {
   }
   catch (Exception e) {
     println("failed");
+    println("please help this is pain");
     return new char[0][0];
   }
   
@@ -527,13 +551,22 @@ private void levels(char[][] level) {
           enemylist.add(newstuff);
           directionindex++;
         }
+        else if (level[i][j] == 'Y') {
+          //frozen tile on a coin
+          fill(#FF0D29);
+          rect(currentx,currenty,30,30);
+          val++;
+        }
         else if (level[i][j] == 'Q') {
-          //boss on a coin is here
-          
+          //frozen tile on a trick coin
+          fill(#FF0D29);
+          rect(currentx,currenty,30,30);
+          val++;
         }
         else if (level[i][j] == 'T') {
-          //boss is here
-          
+          //frozen tile is here
+          fill(#FF0D29);
+          rect(currentx,currenty,30,30);
         }
         else {
           fill(0);
@@ -553,7 +586,7 @@ private void Frozen() {
       if(levelmap[i][j] == 'Q') { // Frozen Tricknote
         levelmap[i][j] = 'B';
       }
-      else if(levelmap[i][j] == 'R') {// Frozen Coin
+      else if(levelmap[i][j] == 'Y') {// Frozen Coin
         levelmap[i][j] = 'C';
       }
       else if(levelmap[i][j] == 'T') {// Frozen Nothing
@@ -574,7 +607,7 @@ private void Frozen() {
         Random rand = new Random();
         int int_random = rand.nextInt(10);
         if(int_random == 5) {
-          levelmap[i][j] = 'R';
+          levelmap[i][j] = 'Y';
         }
       }
       else if(levelmap[i][j] == '.') {

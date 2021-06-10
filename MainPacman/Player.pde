@@ -17,7 +17,7 @@ class Player {
     if (keyPressed) {
       if (!reversed) {
         if (key == 'W' || key == 'w') {
-          if (x <= 0 || map[x-1][y] == '#' || map[x-1][y] == 'E' || map[x-1][y] == 'O') {
+          if (x <= 0 || map[x-1][y] == '#' || map[x-1][y] == 'E' || map[x-1][y] == 'O' || map[x-1][y] == 'H'  || map[x-1][y] == 'Q' || map[x-1][y] == 'Y' || map[x-1][y] == 'T') {
           }
           else {
             if (map[x][y] == 'R') {
@@ -54,7 +54,7 @@ class Player {
         }
         
         else if (key == 'A' || key == 'a') {
-          if (y <= 0 || map[x][y-1] == '#' || map[x][y-1] == 'E' || map[x][y-1] == 'O') {
+          if (y <= 0 || map[x][y-1] == '#' || map[x][y-1] == 'E' || map[x][y-1] == 'O' || map[x][y-1] == 'H' || map[x][y-1] == 'Q' || map[x][y-1] == 'Y' || map[x][y-1] == 'T') {
           }
           else {
             if (map[x][y] == 'R') {
@@ -91,7 +91,7 @@ class Player {
         }
         
         else if (key == 'S' || key == 's') {
-          if (x >= map.length-1 || map[x+1][y] == '#' || map[x+1][y] == 'E' || map[x+1][y] == 'O') {
+          if (x >= map.length-1 || map[x+1][y] == '#' || map[x+1][y] == 'E' || map[x+1][y] == 'O' || map[x+1][y] == 'H' || map[x+1][y] == 'Q' || map[x+1][y] == 'Y' || map[x+1][y] == 'T') {
           }
           else {
             if (map[x][y] == 'R') {
@@ -140,7 +140,7 @@ class Player {
         }
         
         else if (key == 'D' || key == 'd') {
-          if (y >= map[0].length-1 || map[x][y+1] == '#' || map[x][y+1] == 'E' || map[x][y+1] == 'O') {
+          if (y >= map[0].length-1 || map[x][y+1] == '#' || map[x][y+1] == 'E' || map[x][y+1] == 'O' || map[x][y+1] == 'H' || map[x][y+1] == 'Q' || map[x][y+1] == 'Y' || map[x][y+1] == 'T') {
           }
           else {
             if (map[x][y] == 'R') {
@@ -192,7 +192,7 @@ class Player {
         if (key == CODED) {
           
           if (keyCode == UP) {
-            if (x <= 0 || map[x-1][y] == '#' || map[x-1][y] == 'E' || map[x-1][y] == 'O') {
+            if (x <= 0 || map[x-1][y] == '#' || map[x-1][y] == 'E' || map[x-1][y] == 'O' || map[x-1][y] == 'H' || map[x-1][y] == 'Q' || map[x-1][y] == 'Y' || map[x-1][y] == 'T') {
             }
             else {
               if (map[x][y] == 'R') {
@@ -241,7 +241,7 @@ class Player {
           }
           
           else if (keyCode == LEFT) {
-            if (y <= 0 || map[x][y-1] == '#' || map[x][y-1] == 'E' || map[x][y-1] == 'O') {
+            if (y <= 0 || map[x][y-1] == '#' || map[x][y-1] == 'E' || map[x][y-1] == 'O' || map[x][y-1] == 'H' || map[x][y-1] == 'Q' || map[x][y-1] == 'Y' || map[x][y-1] == 'T') {
             }
             else {
               if (map[x][y] == 'R') {
@@ -290,7 +290,7 @@ class Player {
           }
           
           else if (keyCode == DOWN) {
-            if (x >= map.length-1 || map[x+1][y] == '#' || map[x+1][y] == 'E' || map[x+1][y] == 'O') {
+            if (x >= map.length-1 || map[x+1][y] == '#' || map[x+1][y] == 'E' || map[x+1][y] == 'O' || map[x+1][y] == 'H' || map[x+1][y] == 'Q' || map[x+1][y] == 'Y' || map[x+1][y] == 'T') {
             }
             else {
               if (map[x][y] == 'R') {
@@ -339,7 +339,7 @@ class Player {
           }
           
           else if (keyCode == RIGHT) {
-            if (y >= map[0].length-1 || map[x][y+1] == '#' || map[x][y+1] == 'E' || map[x][y+1] == 'O') {
+            if (y >= map[0].length-1 || map[x][y+1] == '#' || map[x][y+1] == 'E' || map[x][y+1] == 'O' || map[x][y+1] == 'H' || map[x][y+1] == 'Q' || map[x][y+1] == 'Y' || map[x][y+1] == 'T') {
             }
             else {
               if (map[x][y] == 'R') {
