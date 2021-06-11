@@ -1,4 +1,11 @@
 # APCSFinalProject
+[INSTRUCTIONS FOR USE]
+
+1) Download the files
+2) Open the MainPacman Folder
+3) Open MainPacman.pde
+4) Enjoy the game
+
 [Prototype]
 https://docs.google.com/document/d/1k_w6A_P8MXqn3acamZcGMdxRVrvWz1QNINchRI9JinE/edit?usp=sharing
 
