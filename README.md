@@ -58,3 +58,6 @@ June 7, 2021
 June 9, 2021
 [Adnan] Made new UML Diagram
 [Eric] Created Frozen method in MainPacman which is an level hazard. Once every few seconds(still undetermined) there will be tiles that nobody can walk on that spawns, they will last for x amount of time, then be replaced with new tiles that cannot be walked on by any entity.
+
+June 10, 2021
+[Adnan] Finished making level 3, found some difficulty when the code refused to accept our original idea for the level design, so i spent a while trying to fix it, before giving up and just making a new design. After finishing level 3, I also made it so that players interact with frozen tiles correctly, and then fixed up the opening cutscene so that there is no risk of it failing later on. also reupdated our final uml diagram.
