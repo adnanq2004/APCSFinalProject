@@ -15,6 +15,7 @@ int enemymove;
 int playermove;
 boolean currentreversed;
 int frozentimes;
+int openingcutscene;
 ArrayList<Enemy> enemylist = new ArrayList<Enemy>();
 ArrayList<String> directionlist = new ArrayList<String>();
 
@@ -24,8 +25,9 @@ void setup() {
   rect(-1,-1,1021,931);
   f = createFont("Arial",24,true);
   timenow = second();
-  currentlevel = 3;
+  currentlevel = 0;
   lives = 3;
+  openingcutscene = 0;
   textFont(f);
   for (int i = 0; i < 10; i++) {
     directionlist.add("none");
@@ -37,37 +39,60 @@ void draw() {
   //opening
   if (currentlevel == 0) {
     textFont(f);
-    fill(0);
-    text("Welcome to Pacman!",width/2-120,height/2-50);
-    if (second() - timenow >= 3) {
-      fill(255);
-      rect(-1,-1,1021,931);
-      textFont(f);
+    if (openingcutscene == 0) {
       fill(0);
-      text("The Game Will Begin In!",width/2-120,height/2-50);
-      if (second() - timenow >= 4) {
+      text("Welcome to Pacman!",width/2-120,height/2-50);
+      openingcutscene = 1;
+      timenow = millis();
+    }
+    else if (openingcutscene == 1) {
+      if (millis() - timenow >= 2000) {
+        fill(255);
+        rect(-1,-1,1021,931);
+        fill(0);
+        text("The Game Will Begin In!",width/2-120,height/2-50);
+        openingcutscene = 2;
+        timenow = millis();
+      }
+    }
+    else if (openingcutscene == 2) {
+      if (millis() - timenow >= 1000) {
+        fill(255);
+        rect(-1,-1,1021,931);
+        fill(0);
+        text("The Game Will Begin In!",width/2-120,height/2-50);
         text("3..",width/2-5,height/2);
-        if (second() - timenow >= 5) {
-          fill(255);
-          rect(-1,-1,1021,931);
-          textFont(f);
-          fill(0);
-          text("The Game Will Begin In!",width/2-120,height/2-50);
-          text("2..",width/2-5,height/2);
-          if (second() - timenow >= 6) {
-            fill(255);
-            rect(-1,-1,1021,931);
-            textFont(f);
-            fill(0);
-            text("The Game Will Begin In!",width/2-120,height/2-50);
-            text("1..",width/2-5,height/2);
-          }
-          if (second() - timenow >= 7) {
-            currentlevel = 1;
-            fill(255);
-            rect(-1,-1,1021,931);
-          }
-        }
+        openingcutscene = 3;
+        timenow = millis();
+      }
+    }
+    else if (openingcutscene == 3) {
+      if (millis() - timenow >= 1000) {
+        fill(255);
+        rect(-1,-1,1021,931);
+        fill(0);
+        text("The Game Will Begin In!",width/2-120,height/2-50);
+        text("2..",width/2-5,height/2);
+        openingcutscene = 4;
+        timenow = millis();
+      }
+    }
+    else if (openingcutscene == 4) {
+      if (millis() - timenow >= 1000) {
+        fill(255);
+        rect(-1,-1,1021,931);
+        fill(0);
+        text("The Game Will Begin In!",width/2-120,height/2-50);
+        text("1..",width/2-5,height/2);
+        openingcutscene = 5;
+        timenow = millis();
+      }
+    }
+    else if (openingcutscene == 5) {
+      if (millis() - timenow >= 1000) {
+        currentlevel = 1;
+        fill(255);
+        rect(-1,-1,1021,931);
       }
     }
   }
@@ -137,7 +162,7 @@ void draw() {
     rect(-1,-1,1021,931);
     enemylist.clear();
     currentlevel = 2.1;
-    levelmap = generatemap("./level3.txt");
+    levelmap = generatemap("./level2.txt");
     remaining = -1;
     enemymove = millis();
     playermove = millis();
